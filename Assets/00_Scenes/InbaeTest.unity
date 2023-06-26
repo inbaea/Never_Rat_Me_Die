@@ -3802,7 +3802,7 @@ GameObject:
   - component: {fileID: 2013042142}
   - component: {fileID: 2013042144}
   m_Layer: 5
-  m_Name: Chese
+  m_Name: Cheese
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

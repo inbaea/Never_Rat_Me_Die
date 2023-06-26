@@ -23,7 +23,7 @@ public class Move : MonoBehaviour
     {
         tr = gameObject.transform;
         rb = gameObject.GetComponent<Rigidbody2D>();
-        moveSpeed = 1000f;
+        moveSpeed = 1250f;
         GameManager = GameObject.Find("GameManager");
     }
 
