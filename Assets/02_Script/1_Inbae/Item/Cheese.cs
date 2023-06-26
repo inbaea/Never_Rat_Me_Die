@@ -20,6 +20,10 @@ public class Cheese : MonoBehaviour
                         gameObject.SetActive(false);
                         gamemanager.GetComponent<GameManager>().LeftMoveCount += 5;
                     }
+                    else if (gameObject.transform.parent.transform.GetChild(i).name != "Cheese")
+                    {
+                        gameObject.SetActive(false);
+                    }
                 }
     }
 }
