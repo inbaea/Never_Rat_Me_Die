@@ -4,26 +4,29 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    Transform tr;
-    string Block_name;
-    int block_num = 0;
-    Rigidbody2D rb;
+    public Transform tr;
+    public string Block_name;
+    public float moveSpeed;
+    public int block_num = 0;
+    public Rigidbody2D rb;
 
-    bool Lefted = false;
-    bool Righted = false;
-    bool Uped = false;
-    bool Downed = false;
+    public bool Lefted = false;
+    public bool Righted = false;
+    public bool Uped = false;
+    public bool Downed = false;
 
-    bool canMove = true;
+    public bool canMove = true;
 
     void Start()
     {
         tr = gameObject.transform;
         rb = gameObject.GetComponent<Rigidbody2D>();
+        moveSpeed = 1000f;
     }
 
     void Update()
     {
+        gameObject.GetComponent<StoneMove>().MeetStone();
         if (Input.GetKeyDown(KeyCode.LeftArrow) && canMove)
         {
             if (block_num == 0 || block_num == 7 || block_num == 14 || block_num == 20 || block_num == 26)
@@ -48,6 +51,9 @@ public class Move : MonoBehaviour
                 return;
             MoveDown();
         }
+
+        if (!canMove) Deceleration();
+        if (!canMove) CannotGo();
 
         if (gameObject.GetComponent<RectTransform>().anchoredPosition.x < 0 && Lefted)
         {
@@ -90,7 +96,7 @@ public class Move : MonoBehaviour
         tr.SetParent(MoveToThisBlock.transform);
         MoveToThisBlock.transform.SetAsLastSibling();
 
-        Vector3 getVel = new Vector3(-100f, 0, 0);
+        Vector3 getVel = new Vector3(-moveSpeed, 0, 0);
         rb.velocity = getVel;
     }
 
@@ -104,7 +110,7 @@ public class Move : MonoBehaviour
         tr.SetParent(MoveToThisBlock.transform);
         MoveToThisBlock.transform.SetAsLastSibling();
 
-        Vector3 getVel = new Vector3(100f, 0, 0);
+        Vector3 getVel = new Vector3(moveSpeed, 0, 0);
         rb.velocity = getVel;
     }
 
@@ -121,7 +127,7 @@ public class Move : MonoBehaviour
         tr.SetParent(MoveToThisBlock.transform);
         MoveToThisBlock.transform.SetAsLastSibling();
 
-        Vector3 getVel = new Vector3(0, 100f, 0);
+        Vector3 getVel = new Vector3(0, moveSpeed, 0);
         rb.velocity = getVel;
     }
 
@@ -138,7 +144,109 @@ public class Move : MonoBehaviour
         tr.SetParent(MoveToThisBlock.transform);
         MoveToThisBlock.transform.SetAsLastSibling();
 
-        Vector3 getVel = new Vector3(0, -100f, 0);
+        Vector3 getVel = new Vector3(0, -moveSpeed, 0);
         rb.velocity = getVel;
+    }
+
+    public void Deceleration()
+    {
+        if (Lefted)
+        {
+            if (gameObject.GetComponent<RectTransform>().anchoredPosition.x < 50)
+            {
+                Vector3 getVel = new Vector3(-moveSpeed/4, 0, 0);
+                rb.velocity = getVel;
+            }
+        }
+
+        if (Righted)
+        {
+            if (gameObject.GetComponent<RectTransform>().anchoredPosition.x > -50)
+            {
+                Vector3 getVel = new Vector3(moveSpeed/4, 0, 0);
+                rb.velocity = getVel;
+            }
+        }
+
+        if (Uped)
+        {
+            if (gameObject.GetComponent<RectTransform>().anchoredPosition.y > -50)
+            {
+                Vector3 getVel = new Vector3(0, moveSpeed/4, 0);
+                rb.velocity = getVel;
+            }
+        }
+
+        if (Downed)
+        {
+            if (gameObject.GetComponent<RectTransform>().anchoredPosition.y < 50)
+            {
+                Vector3 getVel = new Vector3(0, -moveSpeed/4, 0);
+                rb.velocity = getVel;
+            }
+        }
+    }
+
+    public void CannotGo()
+    {
+        if (Lefted)
+        {
+            if(gameObject.GetComponent<RectTransform>().anchoredPosition.x < 80)
+            {
+                for (int i = 0; i < gameObject.transform.parent.transform.childCount; i++)
+                {
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "Stone")
+                    {
+                        Lefted = false;
+                        MoveRight();
+                    }
+                }
+            }
+        }
+
+        if (Righted)
+        {
+            if(gameObject.GetComponent<RectTransform>().anchoredPosition.x > -80)
+            {
+                for (int i = 0; i < gameObject.transform.parent.transform.childCount; i++)
+                {
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "Stone")
+                    {
+                        Righted = false;
+                        MoveLeft();
+                    }
+                }
+            }
+        }
+
+        if (Uped)
+        {
+            if(gameObject.GetComponent<RectTransform>().anchoredPosition.y > -80)
+            {
+                for (int i = 0; i < gameObject.transform.parent.transform.childCount; i++)
+                {
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "Stone")
+                    {
+                        Uped = false;
+                        MoveDown();
+                    }
+                }
+            }
+        }
+
+        if (Downed)
+        {
+            if(gameObject.GetComponent<RectTransform>().anchoredPosition.y < 80)
+            {
+                for (int i = 0; i < gameObject.transform.parent.transform.childCount; i++)
+                {
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "Stone")
+                    {
+                        Downed = false;
+                        MoveUp();
+                    }
+                }
+            }
+        }
     }
 }
