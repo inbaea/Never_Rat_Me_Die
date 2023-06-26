@@ -36,6 +36,13 @@ public class StoneMove : MonoBehaviour
             int newblock_num = MoveScript.GetComponent<Move>().block_num -1;
             string MoveStoneHere_num = "Block" + newblock_num;
             GameObject MoveStoneHere = GameObject.Find(MoveStoneHere_num);
+            for (int i = 0; i < MoveStoneHere.transform.childCount; i++)
+            {
+                if (MoveStoneHere.transform.GetChild(i).name == "Stone")
+                {
+                    return;
+                }
+            }
             StoneObject.transform.SetParent(MoveStoneHere.transform);
             StoneObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0);
         }
@@ -47,13 +54,20 @@ public class StoneMove : MonoBehaviour
             int newblock_num = MoveScript.GetComponent<Move>().block_num + 1;
             string MoveStoneHere_num = "Block" + newblock_num;
             GameObject MoveStoneHere = GameObject.Find(MoveStoneHere_num);
+            for (int i = 0; i < MoveStoneHere.transform.childCount; i++)
+            {
+                if (MoveStoneHere.transform.GetChild(i).name == "Stone")
+                {
+                    return;
+                }
+            }
             StoneObject.transform.SetParent(MoveStoneHere.transform);
             StoneObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0);
         }
 
         if (MoveScript.GetComponent<Move>().Uped)
         {
-            if (MoveScript.GetComponent<Move>().block_num >= 26)
+            if (MoveScript.GetComponent<Move>().block_num >= 26 || MoveScript.GetComponent<Move>().block_num == 7)
                 return;
             int newblock_num;
             if (MoveScript.GetComponent<Move>().block_num < 7)
@@ -62,6 +76,13 @@ public class StoneMove : MonoBehaviour
                 newblock_num = MoveScript.GetComponent<Move>().block_num + 6;
             string MoveStoneHere_num = "Block" + newblock_num;
             GameObject MoveStoneHere = GameObject.Find(MoveStoneHere_num);
+            for (int i = 0; i < MoveStoneHere.transform.childCount; i++)
+            {
+                if (MoveStoneHere.transform.GetChild(i).name == "Stone")
+                {
+                    return;
+                }
+            }
             StoneObject.transform.SetParent(MoveStoneHere.transform);
             StoneObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0);
         }
@@ -77,6 +98,13 @@ public class StoneMove : MonoBehaviour
                 newblock_num = MoveScript.GetComponent<Move>().block_num - 7;
             string MoveStoneHere_num = "Block" + newblock_num;
             GameObject MoveStoneHere = GameObject.Find(MoveStoneHere_num);
+            for (int i = 0; i < MoveStoneHere.transform.childCount; i++)
+            {
+                if (MoveStoneHere.transform.GetChild(i).name == "Stone")
+                {
+                    return;
+                }
+            }
             StoneObject.transform.SetParent(MoveStoneHere.transform);
             StoneObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0);
         }

@@ -9,6 +9,7 @@ public class Move : MonoBehaviour
     public float moveSpeed;
     public int block_num = 0;
     public Rigidbody2D rb;
+    public GameObject GameManager;
 
     public bool Lefted = false;
     public bool Righted = false;
@@ -16,40 +17,56 @@ public class Move : MonoBehaviour
     public bool Downed = false;
 
     public bool canMove = true;
+    public bool metStone = false;
 
     void Start()
     {
         tr = gameObject.transform;
         rb = gameObject.GetComponent<Rigidbody2D>();
         moveSpeed = 1000f;
+        GameManager = GameObject.Find("GameManager");
     }
 
     void Update()
     {
         gameObject.GetComponent<StoneMove>().MeetStone();
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && canMove)
+        if (GameManager.GetComponent<GameManager>().LeftMoveCount <= 0)
         {
-            if (block_num == 0 || block_num == 7 || block_num == 14 || block_num == 20 || block_num == 26)
-                return;
-            MoveLeft();
+            canMove = false;
+            return;
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && canMove)
+
+        if (canMove)
         {
-            if (block_num == 6 || block_num == 13 || block_num == 19 || block_num == 25 || block_num == 31)
-                return;
-            MoveRight();
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && canMove)
-        {
-            if (block_num > 25 || block_num == 7)
-                return;
-            MoveUp();
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && canMove)
-        {
-            if (block_num < 7)
-                return;
-            MoveDown();
+            metStone = false;
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+            {
+                if (block_num == 0 || block_num == 7 || block_num == 14 || block_num == 20 || block_num == 26)
+                    return;
+                MoveLeft();
+                GameManager.GetComponent<GameManager>().LeftMoveCount--;
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            {
+                if (block_num == 6 || block_num == 13 || block_num == 19 || block_num == 25 || block_num == 31)
+                    return;
+                MoveRight();
+                GameManager.GetComponent<GameManager>().LeftMoveCount--;
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            {
+                if (block_num > 25 || block_num == 7)
+                    return;
+                MoveUp();
+                GameManager.GetComponent<GameManager>().LeftMoveCount--;
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+            {
+                if (block_num < 7)
+                    return;
+                MoveDown();
+                GameManager.GetComponent<GameManager>().LeftMoveCount--;
+            }
         }
 
         if (!canMove) Deceleration();
@@ -150,11 +167,13 @@ public class Move : MonoBehaviour
 
     public void Deceleration()
     {
+        if (metStone)
+            return;
         if (Lefted)
         {
             if (gameObject.GetComponent<RectTransform>().anchoredPosition.x < 50)
             {
-                Vector3 getVel = new Vector3(-moveSpeed/4, 0, 0);
+                Vector3 getVel = new Vector3(-moveSpeed/8, 0, 0);
                 rb.velocity = getVel;
             }
         }
@@ -163,7 +182,7 @@ public class Move : MonoBehaviour
         {
             if (gameObject.GetComponent<RectTransform>().anchoredPosition.x > -50)
             {
-                Vector3 getVel = new Vector3(moveSpeed/4, 0, 0);
+                Vector3 getVel = new Vector3(moveSpeed/8, 0, 0);
                 rb.velocity = getVel;
             }
         }
@@ -172,7 +191,7 @@ public class Move : MonoBehaviour
         {
             if (gameObject.GetComponent<RectTransform>().anchoredPosition.y > -50)
             {
-                Vector3 getVel = new Vector3(0, moveSpeed/4, 0);
+                Vector3 getVel = new Vector3(0, moveSpeed/8, 0);
                 rb.velocity = getVel;
             }
         }
@@ -181,7 +200,7 @@ public class Move : MonoBehaviour
         {
             if (gameObject.GetComponent<RectTransform>().anchoredPosition.y < 50)
             {
-                Vector3 getVel = new Vector3(0, -moveSpeed/4, 0);
+                Vector3 getVel = new Vector3(0, -moveSpeed/8, 0);
                 rb.velocity = getVel;
             }
         }
@@ -198,6 +217,7 @@ public class Move : MonoBehaviour
                     if (gameObject.transform.parent.transform.GetChild(i).name == "Stone")
                     {
                         Lefted = false;
+                        metStone = true;
                         MoveRight();
                     }
                 }
@@ -213,6 +233,7 @@ public class Move : MonoBehaviour
                     if (gameObject.transform.parent.transform.GetChild(i).name == "Stone")
                     {
                         Righted = false;
+                        metStone = true;
                         MoveLeft();
                     }
                 }
@@ -228,6 +249,7 @@ public class Move : MonoBehaviour
                     if (gameObject.transform.parent.transform.GetChild(i).name == "Stone")
                     {
                         Uped = false;
+                        metStone = true;
                         MoveDown();
                     }
                 }
@@ -243,6 +265,7 @@ public class Move : MonoBehaviour
                     if (gameObject.transform.parent.transform.GetChild(i).name == "Stone")
                     {
                         Downed = false;
+                        metStone = true;
                         MoveUp();
                     }
                 }
