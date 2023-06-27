@@ -9,7 +9,6 @@ public class PlayerController: MonoBehaviour
 {
     private float timeToMove = 0.25f;
 
-
     public Vector2 size;
 
     public int moveCount = 99;

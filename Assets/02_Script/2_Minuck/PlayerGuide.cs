@@ -16,6 +16,7 @@ public class PlayerGuide : MonoBehaviour
     public LayerMask Goal;
     public LayerMask Stone;
     public LayerMask Ground;
+    public LayerMask Item;
 
     private float tileSize = 2f;
     public Vector2 size;
@@ -78,6 +79,7 @@ public class PlayerGuide : MonoBehaviour
         if (moveCount <= 0)
         {
             // failed to stage clear
+
 
             return;
         }
@@ -159,6 +161,17 @@ public class PlayerGuide : MonoBehaviour
             // the object is Goal
             // Stage Clear
             Debug.Log("GOAL!");
+
+            transform.position = targetPos;
+
+            return;
+        }
+
+        if (Physics2D.OverlapBox(targetPos, size, 0f, Item) != null)
+        {
+            // the object is Item
+            // Stage Clear
+            Debug.Log("Item Looted");
 
             transform.position = targetPos;
 

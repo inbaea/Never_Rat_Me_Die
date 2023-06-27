@@ -19,6 +19,11 @@ public class StoneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    private void Awake()
+    {
         xVelocity = 0f;
         yVelocity = 0f;
         target = Physics2D.OverlapBox(transform.position, size, 0f, stoneGuide).gameObject;
