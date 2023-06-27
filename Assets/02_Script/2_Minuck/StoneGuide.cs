@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class StoneGuide : MonoBehaviour
 {
-    public GameObject parent;
+    public GameObject stone;
 
     public bool isMoving;
     public bool isGetPushed;
@@ -12,17 +13,18 @@ public class StoneGuide : MonoBehaviour
     private Vector3 origPos, targetPos;
 
     public LayerMask Ground;
+    public LayerMask Stone;
 
     private float tileSize = 2f;
-    public Vector2 size;
+    public Vector2 size = new Vector2(1,1);
 
     public float moveSpeed = 10f;
     public float velocity = 0f;
 
     void Start()
     {
-        parent = transform.parent.gameObject;
-        transform.position = parent.transform.position;
+        stone = Physics2D.OverlapBox(transform.position, size, 0f, Stone).gameObject;
+        transform.position = stone.transform.position;
 
         isMoving = false;
         isGetPushed = false;
@@ -31,9 +33,9 @@ public class StoneGuide : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(parent.transform.position, transform.position) <= 0.02)
+        if (Vector2.Distance(stone.transform.position, transform.position) <= 0.02)
         {
-            parent.transform.position = transform.position;
+            stone.transform.position = transform.position;
             isMoving = false;
             isGetPushed = false;
         }
@@ -62,7 +64,7 @@ public class StoneGuide : MonoBehaviour
         // funtion for object checking
         // 
 
-        origPos = transform.localPosition;
+        origPos = transform.position;
         targetPos = origPos + (direction * tileSize);
 
         if (Physics2D.OverlapBox(targetPos, size, 0f, Ground) != null || Physics2D.OverlapBox(targetPos, size, 0f) == null)
@@ -71,7 +73,7 @@ public class StoneGuide : MonoBehaviour
             // then move
             Debug.Log("Empty Space, Move Stone");
 
-            transform.position = transform.position + targetPos;
+            transform.position = targetPos;
 
             return;
         }

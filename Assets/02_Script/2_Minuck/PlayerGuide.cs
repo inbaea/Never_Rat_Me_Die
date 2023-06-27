@@ -99,7 +99,10 @@ public class PlayerGuide : MonoBehaviour
         {
             StoneGuide stoneGuide = tempStoneObj.GetComponent<StoneGuide>();
 
-            stoneGuide.Move(direction);
+            if (stoneGuide.isGetPushed == false)
+            {
+                stoneGuide.Move(direction);
+            }
         }
         else
         {

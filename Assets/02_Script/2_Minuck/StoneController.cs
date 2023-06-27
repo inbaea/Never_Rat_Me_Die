@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class StoneController : MonoBehaviour
@@ -11,12 +12,16 @@ public class StoneController : MonoBehaviour
 
     public GameObject target;
 
+    public LayerMask stoneGuide;
+
+    public Vector2 size = new Vector2(1,1);
+
     // Start is called before the first frame update
     void Start()
     {
         xVelocity = 0f;
         yVelocity = 0f;
-        target = transform.GetChild(0).gameObject;
+        target = Physics2D.OverlapBox(transform.position, size, 0f, stoneGuide).gameObject;
     }
 
     // Update is called once per frame
