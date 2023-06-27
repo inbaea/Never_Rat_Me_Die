@@ -5,10 +5,6 @@ using UnityEngine;
 public class PlayerGuide : MonoBehaviour
 {
     public GameObject player;
-    public PlayerController playerController;
-
-    // Start is called before the first frame update
-
 
     public bool isMoving;
 
@@ -95,8 +91,20 @@ public class PlayerGuide : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, 0.5f);
     }
 
-    void TryToPush(Vector3 direction)
+    void Push(Vector3 direction)
     {
+        GameObject tempStoneObj = GameObject.FindWithTag("StoneGuide");
+
+        if (tempStoneObj != null)
+        {
+            StoneGuide stoneGuide = tempStoneObj.GetComponent<StoneGuide>();
+
+            stoneGuide.Move(direction);
+        }
+        else
+        {
+            Debug.LogError("Stone Guide Not Founded");
+        }
 
     }
 
@@ -124,7 +132,7 @@ public class PlayerGuide : MonoBehaviour
             // the object is Stone
             Debug.Log("Stone");
 
-            TryToPush(direction);
+            Push(direction);
 
             return;
         }
