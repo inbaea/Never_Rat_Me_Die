@@ -13,6 +13,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        LeftMoveCount = 25;
+        LeftMoveCount = 999;
     }
 }
