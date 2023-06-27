@@ -81,8 +81,12 @@ public class WoodBoxGuide : MonoBehaviour
         else
         {
             // object blocks WoodBoxGuide
-            // can't move
-            Debug.Log("Not Empty Space, Can't Move WoodBoxGuide");
+            // Woodbox Breaks
+            Debug.Log("Not Empty Space, Wood box Breaks");
+
+            WoodBox.GetComponent<WoodBoxController>().Break();
+
+            Destroy(gameObject);
 
             return;
         }

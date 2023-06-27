@@ -32,4 +32,11 @@ public class WoodBoxController : MonoBehaviour
 
         transform.position = new Vector3(targetPosX, targetPosY, transform.position.z);
     }
+
+    public void Break()
+    {
+
+
+        Destroy(gameObject);
+    }
 }
