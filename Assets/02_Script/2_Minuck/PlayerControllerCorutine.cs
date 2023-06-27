@@ -32,7 +32,7 @@ public class PlayerControllerCorutine : MonoBehaviour
 
     void Push(Vector3 direction)
     {
-        GameObject tempStoneObj = GameObject.FindWithTag("StoneGuide");
+        GameObject tempStoneObj = GameObject.FindWithTag("MoveableObject");
 
         if (tempStoneObj != null)
         {
@@ -45,7 +45,7 @@ public class PlayerControllerCorutine : MonoBehaviour
         }
         else
         {
-            Debug.LogError("StoneGuide Guide Not Founded");
+            Debug.LogError("MoveableObject Guide Not Founded");
         }
 
     }
@@ -109,8 +109,8 @@ public class PlayerControllerCorutine : MonoBehaviour
 
         if (Physics2D.OverlapBox(targetPos, size, 0f, Stone) != null)
         {
-            // the object is StoneGuide
-            Debug.Log("StoneGuide");
+            // the object is MoveableObject
+            Debug.Log("MoveableObject");
 
             Push(direction);
 

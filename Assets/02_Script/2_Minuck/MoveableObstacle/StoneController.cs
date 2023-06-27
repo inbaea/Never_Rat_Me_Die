@@ -12,21 +12,15 @@ public class StoneController : MonoBehaviour
 
     public GameObject target;
 
-    public LayerMask stoneGuide;
-
     public Vector2 size = new Vector2(1,1);
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     private void Awake()
     {
         xVelocity = 0f;
         yVelocity = 0f;
-        target = Physics2D.OverlapBox(transform.position, size, 0f, stoneGuide).gameObject;
+
+        target = transform.parent.gameObject;
+        target = target.transform.GetChild(1).gameObject;
     }
 
     // Update is called once per frame

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class StoneGuide : MonoBehaviour
+public class WoodBoxGuide : MonoBehaviour
 {
-    public GameObject stone;
+    public GameObject WoodBox;
 
     public bool isMoving;
     public bool isGetPushed;
@@ -13,15 +13,20 @@ public class StoneGuide : MonoBehaviour
     private Vector3 origPos, targetPos;
 
     public LayerMask Ground;
-    public LayerMask Stone;
 
     private float tileSize = 2f;
-    public Vector2 size = new Vector2(1,1);
+    public Vector2 size = new Vector2(1, 1);
 
+    // Start is called before the first frame update
     void Start()
     {
-        stone = Physics2D.OverlapBox(transform.position, size, 0f, Stone).gameObject;
-        transform.position = stone.transform.position;
+        
+    }
+
+    private void Awake()
+    {
+        WoodBox = transform.parent.transform.GetChild(0).gameObject;
+        transform.position = WoodBox.transform.position;
 
         isMoving = false;
         isGetPushed = false;
@@ -30,15 +35,13 @@ public class StoneGuide : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(stone.transform.position, transform.position) <= 0.02)
+        if (Vector2.Distance(WoodBox.transform.position, transform.position) <= 0.02)
         {
-            stone.transform.position = transform.position;
+            WoodBox.transform.position = transform.position;
             isMoving = false;
             isGetPushed = false;
         }
-
     }
-
 
     public void Move(Vector3 direction)
     {
@@ -69,7 +72,7 @@ public class StoneGuide : MonoBehaviour
         {
             // no object in here
             // then move
-            Debug.Log("Empty Space, Move StoneGuide");
+            Debug.Log("Empty Space, Move WoodBoxGuide");
 
             transform.position = targetPos;
 
@@ -77,10 +80,13 @@ public class StoneGuide : MonoBehaviour
         }
         else
         {
-            // object blocks stone
+            // object blocks WoodBoxGuide
             // can't move
-            Debug.Log("Not Empty Space, Can't Move StoneGuide");
+            Debug.Log("Not Empty Space, Can't Move WoodBoxGuide");
+
+            return;
         }
 
     }
+
 }

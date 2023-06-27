@@ -214,7 +214,7 @@ public class Move : MonoBehaviour
             {
                 for (int i = 0; i < gameObject.transform.parent.transform.childCount; i++)
                 {
-                    if (gameObject.transform.parent.transform.GetChild(i).name == "StoneGuide")
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "MoveableObject")
                     {
                         Lefted = false;
                         metStone = true;
@@ -230,7 +230,7 @@ public class Move : MonoBehaviour
             {
                 for (int i = 0; i < gameObject.transform.parent.transform.childCount; i++)
                 {
-                    if (gameObject.transform.parent.transform.GetChild(i).name == "StoneGuide")
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "MoveableObject")
                     {
                         Righted = false;
                         metStone = true;
@@ -246,7 +246,7 @@ public class Move : MonoBehaviour
             {
                 for (int i = 0; i < gameObject.transform.parent.transform.childCount; i++)
                 {
-                    if (gameObject.transform.parent.transform.GetChild(i).name == "StoneGuide")
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "MoveableObject")
                     {
                         Uped = false;
                         metStone = true;
@@ -262,7 +262,7 @@ public class Move : MonoBehaviour
             {
                 for (int i = 0; i < gameObject.transform.parent.transform.childCount; i++)
                 {
-                    if (gameObject.transform.parent.transform.GetChild(i).name == "StoneGuide")
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "MoveableObject")
                     {
                         Downed = false;
                         metStone = true;

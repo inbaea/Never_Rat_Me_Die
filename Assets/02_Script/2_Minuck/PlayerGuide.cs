@@ -14,7 +14,7 @@ public class PlayerGuide : MonoBehaviour
 
     public LayerMask Wall;
     public LayerMask Goal;
-    public LayerMask StoneGuide;
+    public LayerMask MoveableObject;
     public LayerMask Ground;
     public LayerMask Item;
 
@@ -103,16 +103,30 @@ public class PlayerGuide : MonoBehaviour
         if (target != null)
         {
             StoneGuide stoneGuide = target.GetComponent<StoneGuide>();
+            WoodBoxGuide woodBoxGuide = target.GetComponent<WoodBoxGuide>();
 
-            if (stoneGuide.isGetPushed == false)
+            if (stoneGuide != null)
             {
-                stoneGuide.Move(direction);
-                target = null;
+                if (stoneGuide.isGetPushed == false)
+                {
+                    stoneGuide.Move(direction);
+                    target = null;
+                }
             }
+
+            if (woodBoxGuide != null)
+            {
+                if (woodBoxGuide.isGetPushed == false)
+                {
+                    woodBoxGuide.Move(direction);
+                    target = null;
+                }
+            }
+
         }
         else
         {
-            Debug.LogError("StoneGuide Guide Not Founded");
+            Debug.LogError("MoveableObject Guide Not Founded");
         }
 
     }
@@ -136,12 +150,12 @@ public class PlayerGuide : MonoBehaviour
             return;
         }
 
-        if (Physics2D.OverlapBox(targetPos, size, 0f, StoneGuide) != null)
+        if (Physics2D.OverlapBox(targetPos, size, 0f, MoveableObject) != null)
         {
-            // the object is StoneGuide
-            Debug.Log("StoneGuide");
+            // the object is MoveableObject
+            Debug.Log("MoveableObject");
 
-            GameObject tempStoneObj = Physics2D.OverlapBox(targetPos, size, 0f, StoneGuide).gameObject;
+            GameObject tempStoneObj = Physics2D.OverlapBox(targetPos, size, 0f, MoveableObject).gameObject;
 
             Push(direction, tempStoneObj);
 

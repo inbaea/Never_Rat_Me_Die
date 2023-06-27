@@ -19,7 +19,7 @@ public class Escape : MonoBehaviour
     {
         for (int i = 0; i < tr.childCount; i++)
         {
-            if (tr.GetChild(i).name == "StoneGuide")
+            if (tr.GetChild(i).name == "MoveableObject")
             {
                 canEscape = false;
             }
