@@ -14,7 +14,7 @@ public class PlayerGuide : MonoBehaviour
 
     public LayerMask Wall;
     public LayerMask Goal;
-    public LayerMask Stone;
+    public LayerMask StoneGuide;
     public LayerMask Ground;
     public LayerMask Item;
 
@@ -22,8 +22,6 @@ public class PlayerGuide : MonoBehaviour
     public Vector2 size;
 
     public int moveCount = 99;
-    public float moveSpeed = 10f;
-    public float velocity = 0f;
 
     void Start()
     {
@@ -99,22 +97,22 @@ public class PlayerGuide : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, 0.5f);
     }
 
-    void Push(Vector3 direction)
+    void Push(Vector3 direction, GameObject target)
     {
-        GameObject tempStoneObj = GameObject.FindWithTag("StoneGuide");
-
-        if (tempStoneObj != null)
+        
+        if (target != null)
         {
-            StoneGuide stoneGuide = tempStoneObj.GetComponent<StoneGuide>();
+            StoneGuide stoneGuide = target.GetComponent<StoneGuide>();
 
             if (stoneGuide.isGetPushed == false)
             {
                 stoneGuide.Move(direction);
+                target = null;
             }
         }
         else
         {
-            Debug.LogError("Stone Guide Not Founded");
+            Debug.LogError("StoneGuide Guide Not Founded");
         }
 
     }
@@ -138,12 +136,16 @@ public class PlayerGuide : MonoBehaviour
             return;
         }
 
-        if (Physics2D.OverlapBox(targetPos, size, 0f, Stone) != null)
+        if (Physics2D.OverlapBox(targetPos, size, 0f, StoneGuide) != null)
         {
-            // the object is Stone
-            Debug.Log("Stone");
+            // the object is StoneGuide
+            Debug.Log("StoneGuide");
 
-            Push(direction);
+            GameObject tempStoneObj = Physics2D.OverlapBox(targetPos, size, 0f, StoneGuide).gameObject;
+
+            Push(direction, tempStoneObj);
+
+            tempStoneObj = null;
 
             return;
         }

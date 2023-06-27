@@ -18,7 +18,7 @@ public class StoneMove : MonoBehaviour
         {
             for (int i = 0; i < gameObject.transform.parent.transform.childCount; i++)
             {
-                if (gameObject.transform.parent.transform.GetChild(i).name == "Stone")
+                if (gameObject.transform.parent.transform.GetChild(i).name == "StoneGuide")
                 {
                     StoneObject = gameObject.transform.parent.transform.GetChild(i).gameObject;
                     CanStoneMove();
@@ -38,7 +38,7 @@ public class StoneMove : MonoBehaviour
             GameObject MoveStoneHere = GameObject.Find(MoveStoneHere_num);
             for (int i = 0; i < MoveStoneHere.transform.childCount; i++)
             {
-                if (MoveStoneHere.transform.GetChild(i).name == "Stone")
+                if (MoveStoneHere.transform.GetChild(i).name == "StoneGuide")
                 {
                     return;
                 }
@@ -56,7 +56,7 @@ public class StoneMove : MonoBehaviour
             GameObject MoveStoneHere = GameObject.Find(MoveStoneHere_num);
             for (int i = 0; i < MoveStoneHere.transform.childCount; i++)
             {
-                if (MoveStoneHere.transform.GetChild(i).name == "Stone")
+                if (MoveStoneHere.transform.GetChild(i).name == "StoneGuide")
                 {
                     return;
                 }
@@ -78,7 +78,7 @@ public class StoneMove : MonoBehaviour
             GameObject MoveStoneHere = GameObject.Find(MoveStoneHere_num);
             for (int i = 0; i < MoveStoneHere.transform.childCount; i++)
             {
-                if (MoveStoneHere.transform.GetChild(i).name == "Stone")
+                if (MoveStoneHere.transform.GetChild(i).name == "StoneGuide")
                 {
                     return;
                 }
@@ -100,7 +100,7 @@ public class StoneMove : MonoBehaviour
             GameObject MoveStoneHere = GameObject.Find(MoveStoneHere_num);
             for (int i = 0; i < MoveStoneHere.transform.childCount; i++)
             {
-                if (MoveStoneHere.transform.GetChild(i).name == "Stone")
+                if (MoveStoneHere.transform.GetChild(i).name == "StoneGuide")
                 {
                     return;
                 }

@@ -45,7 +45,7 @@ public class PlayerControllerCorutine : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Stone Guide Not Founded");
+            Debug.LogError("StoneGuide Guide Not Founded");
         }
 
     }
@@ -109,8 +109,8 @@ public class PlayerControllerCorutine : MonoBehaviour
 
         if (Physics2D.OverlapBox(targetPos, size, 0f, Stone) != null)
         {
-            // the object is Stone
-            Debug.Log("Stone");
+            // the object is StoneGuide
+            Debug.Log("StoneGuide");
 
             Push(direction);
 

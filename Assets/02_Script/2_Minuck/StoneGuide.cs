@@ -18,9 +18,6 @@ public class StoneGuide : MonoBehaviour
     private float tileSize = 2f;
     public Vector2 size = new Vector2(1,1);
 
-    public float moveSpeed = 10f;
-    public float velocity = 0f;
-
     void Start()
     {
         stone = Physics2D.OverlapBox(transform.position, size, 0f, Stone).gameObject;
@@ -47,6 +44,7 @@ public class StoneGuide : MonoBehaviour
     {
 
         isMoving = true;
+        isGetPushed = true;
 
         CheckObject(direction);
 
@@ -71,7 +69,7 @@ public class StoneGuide : MonoBehaviour
         {
             // no object in here
             // then move
-            Debug.Log("Empty Space, Move Stone");
+            Debug.Log("Empty Space, Move StoneGuide");
 
             transform.position = targetPos;
 
@@ -81,7 +79,7 @@ public class StoneGuide : MonoBehaviour
         {
             // object blocks stone
             // can't move
-            Debug.Log("Not Empty Space, Can't Move Stone");
+            Debug.Log("Not Empty Space, Can't Move StoneGuide");
         }
 
     }
