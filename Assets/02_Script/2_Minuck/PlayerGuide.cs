@@ -6,6 +6,8 @@ public class PlayerGuide : MonoBehaviour
 {
     public GameObject player;
 
+    private AudioSource moveSound;
+
     public bool isMoving;
 
     private Vector3 origPos, targetPos;
@@ -24,6 +26,8 @@ public class PlayerGuide : MonoBehaviour
 
     void Start()
     {
+        moveSound = GetComponent<AudioSource>();
+
         transform.position = player.transform.position;
 
         isMoving = false;
@@ -77,6 +81,8 @@ public class PlayerGuide : MonoBehaviour
 
             return;
         }
+
+        moveSound.Play();
 
         CheckObject(direction);
 
