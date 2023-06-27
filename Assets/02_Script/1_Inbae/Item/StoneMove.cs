@@ -42,6 +42,10 @@ public class StoneMove : MonoBehaviour
                 {
                     return;
                 }
+                if (MoveStoneHere.transform.GetChild(i).name == "Escape")
+                {
+                    return;
+                }
             }
             StoneObject.transform.SetParent(MoveStoneHere.transform);
             StoneObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0);
@@ -57,6 +61,10 @@ public class StoneMove : MonoBehaviour
             for (int i = 0; i < MoveStoneHere.transform.childCount; i++)
             {
                 if (MoveStoneHere.transform.GetChild(i).name == "MoveableObject")
+                {
+                    return;
+                }
+                if (MoveStoneHere.transform.GetChild(i).name == "Escape")
                 {
                     return;
                 }
@@ -82,6 +90,10 @@ public class StoneMove : MonoBehaviour
                 {
                     return;
                 }
+                if (MoveStoneHere.transform.GetChild(i).name == "Escape")
+                {
+                    return;
+                }
             }
             StoneObject.transform.SetParent(MoveStoneHere.transform);
             StoneObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0);
@@ -101,6 +113,10 @@ public class StoneMove : MonoBehaviour
             for (int i = 0; i < MoveStoneHere.transform.childCount; i++)
             {
                 if (MoveStoneHere.transform.GetChild(i).name == "MoveableObject")
+                {
+                    return;
+                }
+                if (MoveStoneHere.transform.GetChild(i).name == "Escape")
                 {
                     return;
                 }

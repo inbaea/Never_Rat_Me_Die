@@ -10,6 +10,7 @@ public class Move : MonoBehaviour
     public int block_num = 0;
     public Rigidbody2D rb;
     public GameObject GameManager;
+    public GameObject FlaskObject;
 
     public bool Lefted = false;
     public bool Righted = false;
@@ -220,6 +221,13 @@ public class Move : MonoBehaviour
                         metStone = true;
                         MoveRight();
                     }
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "Flask")
+                    {
+                        FlaskObject = gameObject.transform.parent.transform.GetChild(i).gameObject;
+                        gameObject.GetComponent<FlaskMove>().FlaskThrowMove();
+                        Lefted = false;
+                        MoveRight();
+                    }
                 }
             }
         }
@@ -234,6 +242,13 @@ public class Move : MonoBehaviour
                     {
                         Righted = false;
                         metStone = true;
+                        MoveLeft();
+                    }
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "Flask")
+                    {   
+                        FlaskObject = gameObject.transform.parent.transform.GetChild(i).gameObject;
+                        gameObject.GetComponent<FlaskMove>().FlaskThrowMove();
+                        Righted = false;
                         MoveLeft();
                     }
                 }
@@ -252,6 +267,13 @@ public class Move : MonoBehaviour
                         metStone = true;
                         MoveDown();
                     }
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "Flask")
+                    {
+                        FlaskObject = gameObject.transform.parent.transform.GetChild(i).gameObject;
+                        gameObject.GetComponent<FlaskMove>().FlaskThrowMove();
+                        Uped = false;
+                        MoveDown();
+                    }
                 }
             }
         }
@@ -266,6 +288,13 @@ public class Move : MonoBehaviour
                     {
                         Downed = false;
                         metStone = true;
+                        MoveUp();
+                    }
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "Flask")
+                    {
+                        FlaskObject = gameObject.transform.parent.transform.GetChild(i).gameObject;
+                        gameObject.GetComponent<FlaskMove>().FlaskThrowMove();
+                        Downed = false;
                         MoveUp();
                     }
                 }
