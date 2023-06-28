@@ -32,6 +32,12 @@ public class PlayerGuide : MonoBehaviour
         isMoving = false;
     }
 
+    private void Awake()
+    {
+        player = transform.parent.transform.GetChild(0).gameObject;
+        transform.position = player.transform.position;
+    }
+
     // Update is called once per frame
     void Update()
     {

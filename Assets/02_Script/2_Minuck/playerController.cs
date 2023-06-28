@@ -11,8 +11,6 @@ public class PlayerController: MonoBehaviour
 
     public Vector2 size;
 
-    public int moveCount = 99;
-
     public float xVelocity = 5.0f;
     public float yVelocity = 5.0f;
 
@@ -23,6 +21,12 @@ public class PlayerController: MonoBehaviour
     {
         xVelocity = 0f;
         yVelocity = 0f;
+    }
+
+    private void Awake()
+    {
+        target = transform.parent.gameObject;
+        target = target.transform.GetChild(1).gameObject;
     }
 
     // Update is called once per frame

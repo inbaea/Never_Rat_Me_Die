@@ -9,6 +9,10 @@ TagManager:
   - Item
   - WoodBox
   - WoodBoxGuide
+  - AcidFloor
+  - StoneSet
+  - WoodBoxSet
+  - PlayerGuide
   layers:
   - Default
   - TransparentFX

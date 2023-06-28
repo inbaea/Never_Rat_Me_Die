@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 3670074389408327414}
   m_Layer: 0
   m_Name: WoodBoxSet
-  m_TagString: Untagged
+  m_TagString: WoodBoxSet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

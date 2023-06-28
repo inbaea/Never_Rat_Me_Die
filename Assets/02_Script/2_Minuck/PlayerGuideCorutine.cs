@@ -124,15 +124,8 @@ public class PlayerGuideCorutine : MonoBehaviour
             // then move
             Debug.Log("Empty Space");
 
-            while(true)
-            {
-                transform.position = transform.position + (direction * 0.1f);
+            transform.position = targetPos;
 
-                if (transform.position == targetPos)
-                {
-                    break;
-                }
-            }
             moveSound.Play();
 
             return;
