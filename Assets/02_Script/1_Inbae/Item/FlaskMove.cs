@@ -148,7 +148,7 @@ public class FlaskMove : MonoBehaviour
             GameObject MoveNext = GameObject.Find(MoveNext_num);
             for (int i = 0; i < MoveNext.transform.childCount; i++)
             {
-                if (MoveNext.transform.GetChild(i).name == "Stone")
+                if (MoveNext.transform.GetChild(i).name == "MoveableObject")
                 {
                     return;
                 }
@@ -174,7 +174,7 @@ public class FlaskMove : MonoBehaviour
             GameObject MoveNext = GameObject.Find(MoveNext_num);
             for (int i = 0; i < MoveNext.transform.childCount; i++)
             {
-                if (MoveNext.transform.GetChild(i).name == "Stone")
+                if (MoveNext.transform.GetChild(i).name == "MoveableObject")
                 {
                     return;
                 }

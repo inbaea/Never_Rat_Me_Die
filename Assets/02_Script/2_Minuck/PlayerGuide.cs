@@ -82,7 +82,7 @@ public class PlayerGuide : MonoBehaviour
             return;
         }
 
-        moveSound.Play();
+
 
         CheckObject(direction);
 
@@ -146,6 +146,8 @@ public class PlayerGuide : MonoBehaviour
             Debug.Log("Empty Space");
 
             transform.position = targetPos;
+
+            moveSound.Play();
 
             return;
         }

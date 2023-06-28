@@ -3,24 +3,31 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 
-public class PlayerControllerCorutine : MonoBehaviour
+public class PlayerGuideCorutine : MonoBehaviour
 {
 
     private float moveCooldown = 0.25f;
 
     private Vector3 origPos, targetPos;
 
+    private AudioSource moveSound;
+
     public LayerMask Wall;
     public LayerMask Goal;
-    public LayerMask Stone;
+    public LayerMask MoveableObject;
     public LayerMask Ground;
+    public LayerMask Item;
 
     private float tileSize = 2f;
     public Vector2 size = new Vector2(1,1);
 
+    public int moveCount = 99;
+
     // Start is called before the first frame update
     void Start()
     {
+        moveSound = GetComponent<AudioSource>();
+
         StartCoroutine(Move());
     }
 
@@ -30,18 +37,32 @@ public class PlayerControllerCorutine : MonoBehaviour
         
     }
 
-    void Push(Vector3 direction)
+    void Push(Vector3 direction, GameObject target)
     {
-        GameObject tempStoneObj = GameObject.FindWithTag("MoveableObject");
 
-        if (tempStoneObj != null)
+        if (target != null)
         {
-            StoneGuide stoneGuide = tempStoneObj.GetComponent<StoneGuide>();
+            StoneGuide stoneGuide = target.GetComponent<StoneGuide>();
+            WoodBoxGuide woodBoxGuide = target.GetComponent<WoodBoxGuide>();
 
-            if (stoneGuide.isGetPushed == false)
+            if (stoneGuide != null)
             {
-                stoneGuide.Move(direction);
+                if (stoneGuide.isGetPushed == false)
+                {
+                    stoneGuide.Move(direction);
+                    target = null;
+                }
             }
+
+            if (woodBoxGuide != null)
+            {
+                if (woodBoxGuide.isGetPushed == false)
+                {
+                    woodBoxGuide.Move(direction);
+                    target = null;
+                }
+            }
+
         }
         else
         {
@@ -103,16 +124,21 @@ public class PlayerControllerCorutine : MonoBehaviour
                     break;
                 }
             }
+            moveSound.Play();
 
             return;
         }
 
-        if (Physics2D.OverlapBox(targetPos, size, 0f, Stone) != null)
+        if (Physics2D.OverlapBox(targetPos, size, 0f, MoveableObject) != null)
         {
             // the object is MoveableObject
             Debug.Log("MoveableObject");
 
-            Push(direction);
+            GameObject tempStoneObj = Physics2D.OverlapBox(targetPos, size, 0f, MoveableObject).gameObject;
+
+            Push(direction, tempStoneObj);
+
+            tempStoneObj = null;
 
             return;
         }
@@ -130,6 +156,17 @@ public class PlayerControllerCorutine : MonoBehaviour
             // the object is Goal
             // Stage Clear
             Debug.Log("GOAL!");
+
+            transform.position = targetPos;
+
+            return;
+        }
+
+        if (Physics2D.OverlapBox(targetPos, size, 0f, Item) != null)
+        {
+            // the object is Item
+            // Stage Clear
+            Debug.Log("Item Looted");
 
             transform.position = targetPos;
 

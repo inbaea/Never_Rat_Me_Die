@@ -13,7 +13,6 @@ public class StoneGuide : MonoBehaviour
     private Vector3 origPos, targetPos;
 
     public LayerMask Ground;
-    public LayerMask Stone;
 
     private float tileSize = 2f;
     public Vector2 size = new Vector2(1,1);
