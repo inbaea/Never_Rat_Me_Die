@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerGuideCorutine : MonoBehaviour
 {
 
-    private float moveCooldown = 0.25f;
+    private float moveCooldown = 0.35f;
 
     private Vector3 origPos, targetPos;
 
@@ -23,6 +23,9 @@ public class PlayerGuideCorutine : MonoBehaviour
 
     public int moveCount = 99;
 
+    public bool isStageCleared = false;
+    public bool isFailed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +37,10 @@ public class PlayerGuideCorutine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (moveCount <= 0)
+        {
+            Debug.Log("Failed to Clear Stage");
+        }
     }
 
     void Push(Vector3 direction, GameObject target)
@@ -73,6 +79,7 @@ public class PlayerGuideCorutine : MonoBehaviour
 
     private IEnumerator Move()
     {
+
         while (true)
         {
             if (Input.GetKeyDown(KeyCode.A))
@@ -106,6 +113,8 @@ public class PlayerGuideCorutine : MonoBehaviour
 
     private void CheckObject(Vector3 direction)
     {
+        moveCount--;
+
         origPos = transform.position;
         targetPos = origPos + (direction * tileSize);
 
@@ -158,6 +167,8 @@ public class PlayerGuideCorutine : MonoBehaviour
             Debug.Log("GOAL!");
 
             transform.position = targetPos;
+
+            isStageCleared = true;
 
             return;
         }

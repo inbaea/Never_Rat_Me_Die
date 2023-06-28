@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
 
     public PlayerGuideCorutine playerGuide;
 
+    public RawImage stageClear;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +21,10 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         MoveCount.text = playerGuide.moveCount.ToString();
+
+        if (playerGuide.isStageCleared)
+        {
+            stageClear.gameObject.SetActive(true);
+        }
     }
 }
