@@ -6,12 +6,12 @@ using UnityEngine;
 public abstract class ItemController : MonoBehaviour
 {
 
-    public PlayerGuide playerGuide;
+    public PlayerGuideCorutine playerGuide;
     public PlayerController playerController;
 
     private void Awake()
     {
-        playerGuide = GameObject.Find("PlayerGuide").GetComponent<PlayerGuide>();
+        playerGuide = GameObject.Find("PlayerGuide").GetComponent<PlayerGuideCorutine>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 

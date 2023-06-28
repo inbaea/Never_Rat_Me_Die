@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public Text MoveCount;
 
-    public PlayerGuide playerGuide;
+    public PlayerGuideCorutine playerGuide;
 
     // Start is called before the first frame update
     void Start()
