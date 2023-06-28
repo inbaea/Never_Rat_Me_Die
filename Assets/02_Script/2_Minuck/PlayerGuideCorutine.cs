@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerGuideCorutine : MonoBehaviour
 {
+    public GameObject player;
 
     private float moveCooldown = 0.35f;
 
@@ -18,7 +19,7 @@ public class PlayerGuideCorutine : MonoBehaviour
     public LayerMask Ground;
     public LayerMask Item;
 
-    private float tileSize = 2f;
+    private int tileSize = 2;
     public Vector2 size = new Vector2(1,1);
 
     public int moveCount = 99;
@@ -41,6 +42,12 @@ public class PlayerGuideCorutine : MonoBehaviour
         {
             Debug.Log("Failed to Clear Stage");
         }
+    }
+
+    private void Awake()
+    {
+        player = transform.parent.transform.GetChild(0).gameObject;
+        transform.position = player.transform.position;
     }
 
     void Push(Vector3 direction, GameObject target)
@@ -117,6 +124,8 @@ public class PlayerGuideCorutine : MonoBehaviour
 
         origPos = transform.position;
         targetPos = origPos + (direction * tileSize);
+
+        Debug.Log(direction*tileSize);
 
         if (Physics2D.OverlapBox(targetPos, size, 0f, Ground) != null || Physics2D.OverlapBox(targetPos, size, 0f) == null)
         {

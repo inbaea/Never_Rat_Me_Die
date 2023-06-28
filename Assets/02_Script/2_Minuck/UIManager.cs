@@ -9,12 +9,21 @@ public class UIManager : MonoBehaviour
 
     public PlayerGuideCorutine playerGuide;
 
-    public RawImage stageClear;
+    public GameObject canvas;
 
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    private void Awake()
+    {
+        canvas = gameObject;
+        MoveCount = gameObject.transform.Find("MoveCount").gameObject.GetComponent<Text>();
+        playerGuide = GameObject.Find("PlayerGuide").gameObject.GetComponent<PlayerGuideCorutine>();
         MoveCount.text = playerGuide.moveCount.ToString();
+
     }
 
     // Update is called once per frame
@@ -24,7 +33,12 @@ public class UIManager : MonoBehaviour
 
         if (playerGuide.isStageCleared)
         {
-            stageClear.gameObject.SetActive(true);
+            canvas.transform.Find("StageClear").gameObject.SetActive(true);
+        }
+
+        if (playerGuide.moveCount <= 0)
+        {
+            canvas.transform.Find("FailedToClear").gameObject.SetActive(true);
         }
     }
 }

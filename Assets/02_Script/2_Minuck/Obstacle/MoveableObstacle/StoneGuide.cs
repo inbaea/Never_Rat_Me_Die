@@ -70,7 +70,7 @@ public class StoneGuide : MonoBehaviour
             // then move
             Debug.Log("Empty Space, Move MoveableObject");
 
-            transform.position = targetPos;
+            transform.position = targetPos;   
 
             return;
         }
