@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 503489087852914442}
   - component: {fileID: 503489087852914447}
   - component: {fileID: 503489087852914446}
-  - component: {fileID: 503489087852914445}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -122,7 +121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 1, y: 1}
-  moveCount: 99
   xVelocity: 5
   yVelocity: 5
   target: {fileID: 0}
@@ -142,28 +140,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &503489087852914445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 503489087852914436}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfa427bd8c8bb694481310256f432add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Wall:
-    serializedVersion: 2
-    m_Bits: 64
-  Goal:
-    serializedVersion: 2
-    m_Bits: 128
-  Stone:
-    serializedVersion: 2
-    m_Bits: 256
-  Ground:
-    serializedVersion: 2
-    m_Bits: 512
-  size: {x: 1, y: 1}

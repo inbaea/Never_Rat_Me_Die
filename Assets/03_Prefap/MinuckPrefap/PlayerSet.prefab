@@ -168,6 +168,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1868764795905243633, guid: 09f73d42d1d48254dbb6cb18d93f2e92, type: 3}
+      propertyPath: moveCount
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868764795905243633, guid: 09f73d42d1d48254dbb6cb18d93f2e92, type: 3}
       propertyPath: StoneGuide.m_Bits
       value: 2048
       objectReference: {fileID: 0}
