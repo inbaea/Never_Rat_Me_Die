@@ -189,7 +189,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2048255537977582192, guid: be99f7423e6e3f343bced3e095290fc3, type: 3}
       propertyPath: m_Name
-      value: AcidFloor
+      value: Acidfield
       objectReference: {fileID: 0}
     - target: {fileID: 2048255537977582193, guid: be99f7423e6e3f343bced3e095290fc3, type: 3}
       propertyPath: m_RootOrder
@@ -286,6 +286,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2232460606351790540, guid: dcd942548ebacc04d948d42aff3fae25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903276749447537979, guid: dcd942548ebacc04d948d42aff3fae25, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6051672350334807207, guid: dcd942548ebacc04d948d42aff3fae25, type: 3}
