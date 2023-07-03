@@ -28,7 +28,7 @@ public class PlayerGuideCorutine : MonoBehaviour
     public bool isStageCleared = false;
     public bool isFailed = false;
 
-    public Collider2D objectInTarget;
+    public Collider2D[] objectsInTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -58,27 +58,34 @@ public class PlayerGuideCorutine : MonoBehaviour
 
         if (target != null)
         {
-            StoneGuide stoneGuide = target.GetComponent<StoneGuide>();
-            WoodBoxGuide woodBoxGuide = target.GetComponent<WoodBoxGuide>();
-
-            if (stoneGuide != null)
+            if (target.tag == "StoneGuide")
             {
+                StoneGuide stoneGuide = target.GetComponent<StoneGuide>();
+
                 if (stoneGuide.isGetPushed == false)
                 {
                     stoneGuide.Move(direction);
                     target = null;
                 }
-            }
-
-            if (woodBoxGuide != null)
+            } else if (target.tag == "WoodBoxGuide")
             {
+                WoodBoxGuide woodBoxGuide = target.GetComponent<WoodBoxGuide>();
+
                 if (woodBoxGuide.isGetPushed == false)
                 {
                     woodBoxGuide.Move(direction);
                     target = null;
                 }
-            }
+            } else if (target.tag == "AcidFlaskGuide")
+            {
+                AcidFlaskGuide acidFlaskGuide = target.GetComponent<AcidFlaskGuide>();
 
+                if (acidFlaskGuide.isGetPushed == false)
+                {
+                    acidFlaskGuide.Move(direction);
+                    target = null;
+                }
+            }
         }
         else
         {
@@ -128,70 +135,83 @@ public class PlayerGuideCorutine : MonoBehaviour
         origPos = transform.position;
         targetPos = origPos + (direction * tileSize);
 
-        objectInTarget = Physics2D.OverlapBox(targetPos, size, 0f);
+        objectsInTarget = Physics2D.OverlapBoxAll(targetPos, size, 0f);
 
-        if (objectInTarget != null)
+        if (objectsInTarget.Length != 0)
         {
-            Debug.Log("From Plauer Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
+            Debug.Log("From Player Guide: " + objectsInTarget);
         }
         else
         {
-            Debug.Log("From Plauer Guide: NULL");
+            Debug.Log("From Player Guide: NULL");
         }
         
         try
         {
-            if (objectInTarget.tag == "Ground")
+            if (objectsInTarget.Length == 0)
             {
-                // no object in here
-                // then move
-
+                // null space
                 transform.position = targetPos;
 
                 moveSound.Play();
-
-                return;
             }
-
-            if (objectInTarget.tag == "StoneGuide" || objectInTarget.tag == "WoodBoxGuide")
+            else
             {
-                // the object is MoveableObject
+                for (int i = 0; i < objectsInTarget.Length; i++)
+                {
+                    if (objectsInTarget[i].tag == "Ground")
+                    {
+                        // no object in here
+                        // then move
 
-                GameObject tempStoneObj = objectInTarget.gameObject;
+                        transform.position = targetPos;
 
-                Push(direction, tempStoneObj);
+                        moveSound.Play();
 
-                tempStoneObj = null;
+                        return;
+                    }
 
-                return;
-            }
+                    if (objectsInTarget[i].tag == "StoneGuide" || objectsInTarget[i].tag == "WoodBoxGuide" || objectsInTarget[i].tag == "AcidFlaskGuide")
+                    {
+                        // the object is MoveableObject
 
-            if (objectInTarget.tag == "Wall")
-            {
-                // the object is Wall
+                        GameObject tempStoneObj = objectsInTarget[i].gameObject;
 
-                return;
-            }
+                        Push(direction, tempStoneObj);
 
-            if (objectInTarget.tag == "Goal")
-            {
-                // the object is Goal
-                // Stage Clear
+                        tempStoneObj = null;
 
-                transform.position = targetPos;
+                        return;
+                    }
 
-                isStageCleared = true;
+                    if (objectsInTarget[i].tag == "Wall")
+                    {
+                        // the object is Wall
 
-                return;
-            }
+                        return;
+                    }
 
-            if (objectInTarget.tag == "Item")
-            {
-                // the object is Item
+                    if (objectsInTarget[i].tag == "Goal")
+                    {
+                        // the object is Goal
+                        // Stage Clear
 
-                transform.position = targetPos;
+                        transform.position = targetPos;
 
-                return;
+                        isStageCleared = true;
+
+                        return;
+                    }
+
+                    if (objectsInTarget[i].tag == "Item")
+                    {
+                        // the object is Item
+
+                        transform.position = targetPos;
+
+                        return;
+                    }
+                }
             }
         }
         catch

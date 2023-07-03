@@ -10,6 +10,9 @@ public class AcidFlaskController : MonoBehaviour
     public float yVelocity = 5.0f;
 
     public GameObject target;
+    public GameObject destroyTarget;
+
+    public GameObject AcidFloor;
 
     public Vector2 size = new Vector2(1, 1);
 
@@ -30,5 +33,26 @@ public class AcidFlaskController : MonoBehaviour
         float targetPosY = Mathf.SmoothDamp(transform.position.y, target.transform.position.y, ref yVelocity, timeToMove);
 
         transform.position = new Vector3(targetPosX, targetPosY, transform.position.z);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        destroyTarget = other.gameObject;
+
+        if (other.gameObject.tag == "Stone" ||  other.gameObject.tag == "StoneGuide")
+        {
+            Destroy(other.transform.parent.gameObject.gameObject);
+            Destroy(this.transform.parent.gameObject);
+        }
+        else
+        {
+
+        }
+    }
+
+    public void Break()
+    {
+        Instantiate(AcidFloor, transform.position, transform.rotation);
+        Destroy(this.transform.parent.gameObject);
     }
 }

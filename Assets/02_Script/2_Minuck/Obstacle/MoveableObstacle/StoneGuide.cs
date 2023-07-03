@@ -17,7 +17,7 @@ public class StoneGuide : MonoBehaviour
     private float tileSize = 2f;
     public Vector2 size = new Vector2(1,1);
 
-    public Collider2D objectInTarget;
+    public Collider2D[] objectsInTarget;
 
     private void Awake()
     {
@@ -66,9 +66,9 @@ public class StoneGuide : MonoBehaviour
         origPos = transform.position;
         targetPos = origPos + (direction * tileSize);
 
-        objectInTarget = Physics2D.OverlapBox(targetPos, size, 0f);
+        objectsInTarget = Physics2D.OverlapBoxAll(targetPos, size, 0f);
 
-        if (objectInTarget != null)
+        if (objectsInTarget.Length != 0)
         {
             Debug.Log("From Stone Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
         }
@@ -79,13 +79,27 @@ public class StoneGuide : MonoBehaviour
 
         try
         {
-            if (objectInTarget.tag == "Ground")
+            if (objectsInTarget.Length == 0)
             {
+                //null space
                 transform.position = targetPos;
             }
             else
             {
-
+                for (int i = 0; i < objectsInTarget.Length; i++)
+                {
+                    if (objectsInTarget[i].tag == "Ground")
+                    {
+                        transform.position = targetPos;
+                    }
+                    else if (objectsInTarget[i].tag == "AcidFloor")
+                    {
+                        transform.position = targetPos;
+                    }
+                    else { 
+                    
+                    }
+                }
             }
         }
         catch

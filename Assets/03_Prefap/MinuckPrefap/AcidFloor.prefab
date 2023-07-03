@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2048255537977582156}
   - component: {fileID: 205033794}
   m_Layer: 9
-  m_Name: AcidField
+  m_Name: AcidFloor
   m_TagString: AcidFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AcidFieldController : MonoBehaviour
+public class AcidFloorController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,8 @@ public class AcidFieldController : MonoBehaviour
         if (other.transform.tag == "Stone" || other.transform.tag == "WoodBox")
         {
             other.transform.parent.gameObject.SetActive(false);
-            
+
+            this.gameObject.SetActive(false);     
         }
 
         if (other.transform.tag == "Player")

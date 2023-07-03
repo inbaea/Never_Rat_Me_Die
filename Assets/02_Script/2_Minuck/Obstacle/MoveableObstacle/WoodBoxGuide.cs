@@ -18,7 +18,7 @@ public class WoodBoxGuide : MonoBehaviour
     private float tileSize = 2f;
     public Vector2 size = new Vector2(1, 1);
 
-    public Collider2D objectInTarget;
+    public Collider2D[] objectsInTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -71,9 +71,9 @@ public class WoodBoxGuide : MonoBehaviour
         origPos = transform.position;
         targetPos = origPos + (direction * tileSize);
 
-        objectInTarget = Physics2D.OverlapBox(targetPos, size, 0f);
+        objectsInTarget = Physics2D.OverlapBoxAll(targetPos, size, 0f);
 
-        if (objectInTarget != null)
+        if (objectsInTarget.Length != 0)
         {
             Debug.Log("From Wood Box Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
         }
@@ -84,15 +84,25 @@ public class WoodBoxGuide : MonoBehaviour
 
         try
         {
-            if (objectInTarget.tag == "Ground")
-            {
+            if (objectsInTarget.Length == 0)
+            {   // null space
                 transform.position = targetPos;
             }
             else
             {
-                WoodBox.GetComponent<WoodBoxController>().Break();
+                for (int i = 0; i < objectsInTarget.Length; i++)
+                {
+                    if (objectsInTarget[i].tag == "Ground")
+                    {
+                        transform.position = targetPos;
+                    }
+                    else
+                    {
+                        WoodBox.GetComponent<WoodBoxController>().Break();
 
-                Destroy(gameObject);
+                        Destroy(gameObject);
+                    }
+                }
             }
         }
         catch

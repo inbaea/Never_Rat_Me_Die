@@ -16,6 +16,8 @@ TagManager:
   - Ground
   - Wall
   - Goal
+  - AcidFlask
+  - AcidFlaskGuide
   layers:
   - Default
   - TransparentFX
