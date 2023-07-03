@@ -13,6 +13,7 @@ TagManager:
   - StoneSet
   - WoodBoxSet
   - PlayerGuide
+  - Ground
   layers:
   - Default
   - TransparentFX

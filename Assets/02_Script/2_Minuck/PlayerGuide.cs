@@ -88,8 +88,6 @@ public class PlayerGuide : MonoBehaviour
             return;
         }
 
-
-
         CheckObject(direction);
 
         moveCount--;

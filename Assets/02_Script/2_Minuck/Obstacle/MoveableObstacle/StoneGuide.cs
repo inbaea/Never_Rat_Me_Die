@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using System;
 
 public class StoneGuide : MonoBehaviour
 {
@@ -16,6 +16,8 @@ public class StoneGuide : MonoBehaviour
 
     private float tileSize = 2f;
     public Vector2 size = new Vector2(1,1);
+
+    public Collider2D objectInTarget;
 
     private void Awake()
     {
@@ -64,6 +66,32 @@ public class StoneGuide : MonoBehaviour
         origPos = transform.position;
         targetPos = origPos + (direction * tileSize);
 
+        Debug.Log("From Stone Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
+
+        objectInTarget = Physics2D.OverlapBox(targetPos, size, 0f);
+
+        try
+        {
+            if (objectInTarget.tag == "Ground")
+            {
+                Debug.Log("Ground Space, Move MoveableObject");
+
+                transform.position = targetPos;
+            }
+            else
+            {
+                Debug.Log("Not Empty Space, Can't Move MoveableObject");
+            }
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.Log("Null Space, Move MoveableObject");
+
+            transform.position = targetPos;
+        }
+
+
+        /*
         if (Physics2D.OverlapBox(targetPos, size, 0f, Ground) != null || Physics2D.OverlapBox(targetPos, size, 0f) == null)
         {
             // no object in here
@@ -80,6 +108,6 @@ public class StoneGuide : MonoBehaviour
             // can't move
             Debug.Log("Not Empty Space, Can't Move MoveableObject");
         }
-
+        */
     }
 }

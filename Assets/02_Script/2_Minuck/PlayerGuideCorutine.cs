@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -26,6 +27,8 @@ public class PlayerGuideCorutine : MonoBehaviour
 
     public bool isStageCleared = false;
     public bool isFailed = false;
+
+    public Collider2D objectInTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -125,8 +128,80 @@ public class PlayerGuideCorutine : MonoBehaviour
         origPos = transform.position;
         targetPos = origPos + (direction * tileSize);
 
-        Debug.Log(direction*tileSize);
+        objectInTarget = Physics2D.OverlapBox(targetPos, size, 0f);
 
+        if (objectInTarget != null)
+        {
+            Debug.Log("From Plauer Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
+        }
+        else
+        {
+            Debug.Log("From Plauer Guide: NULL");
+        }
+        
+        try
+        {
+            if (objectInTarget.tag == "Ground")
+            {
+                // no object in here
+                // then move
+
+                transform.position = targetPos;
+
+                moveSound.Play();
+
+                return;
+            }
+
+            if (objectInTarget.tag == "StoneGuide" || objectInTarget.tag == "WoodBoxGuide")
+            {
+                // the object is MoveableObject
+
+                GameObject tempStoneObj = objectInTarget.gameObject;
+
+                Push(direction, tempStoneObj);
+
+                tempStoneObj = null;
+
+                return;
+            }
+
+            if (objectInTarget.tag == "Wall")
+            {
+                // the object is Wall
+
+                return;
+            }
+
+            if (objectInTarget.tag == "Goal")
+            {
+                // the object is Goal
+                // Stage Clear
+
+                transform.position = targetPos;
+
+                isStageCleared = true;
+
+                return;
+            }
+
+            if (objectInTarget.tag == "Item")
+            {
+                // the object is Item
+
+                transform.position = targetPos;
+
+                return;
+            }
+        }
+        catch
+        {
+
+            transform.position = targetPos;
+
+            moveSound.Play();
+        }
+        /*
         if (Physics2D.OverlapBox(targetPos, size, 0f, Ground) != null || Physics2D.OverlapBox(targetPos, size, 0f) == null)
         {
             // no object in here
@@ -185,5 +260,6 @@ public class PlayerGuideCorutine : MonoBehaviour
 
             return;
         }
+        */
     }
 }

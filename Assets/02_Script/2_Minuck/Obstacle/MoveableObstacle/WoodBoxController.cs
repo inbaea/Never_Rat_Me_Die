@@ -35,8 +35,6 @@ public class WoodBoxController : MonoBehaviour
 
     public void Break()
     {
-
-
         Destroy(gameObject);
     }
 }
