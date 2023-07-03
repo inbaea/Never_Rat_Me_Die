@@ -14,6 +14,8 @@ TagManager:
   - WoodBoxSet
   - PlayerGuide
   - Ground
+  - Wall
+  - Goal
   layers:
   - Default
   - TransparentFX

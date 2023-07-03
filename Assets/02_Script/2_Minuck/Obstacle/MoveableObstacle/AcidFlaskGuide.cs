@@ -2,11 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class WoodBoxGuide : MonoBehaviour
+public class AcidFlaskGuide : MonoBehaviour
 {
-    public GameObject WoodBox;
+    public GameObject acidFlask;
 
     public bool isMoving;
     public bool isGetPushed;
@@ -20,16 +19,10 @@ public class WoodBoxGuide : MonoBehaviour
 
     public Collider2D objectInTarget;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private void Awake()
     {
-        WoodBox = transform.parent.transform.GetChild(0).gameObject;
-        transform.position = WoodBox.transform.position;
+        acidFlask = transform.parent.transform.GetChild(0).gameObject;
+        transform.position = acidFlask.transform.position;
 
         isMoving = false;
         isGetPushed = false;
@@ -38,13 +31,15 @@ public class WoodBoxGuide : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(WoodBox.transform.position, transform.position) <= 0.02)
+        if (Vector2.Distance(acidFlask.transform.position, transform.position) <= 0.02)
         {
-            WoodBox.transform.position = transform.position;
+            acidFlask.transform.position = transform.position;
             isMoving = false;
             isGetPushed = false;
         }
+
     }
+
 
     public void Move(Vector3 direction)
     {
@@ -75,11 +70,11 @@ public class WoodBoxGuide : MonoBehaviour
 
         if (objectInTarget != null)
         {
-            Debug.Log("From Wood Box Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
+            Debug.Log("From Acid Flask Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
         }
         else
         {
-            Debug.Log("From Wood Box Guide: NULL");
+            Debug.Log("From Acid Flask Guide: NULL");
         }
 
         try
@@ -90,41 +85,14 @@ public class WoodBoxGuide : MonoBehaviour
             }
             else
             {
-                WoodBox.GetComponent<WoodBoxController>().Break();
+                // not empty space
+                // break the flask
 
-                Destroy(gameObject);
             }
         }
         catch
         {
             transform.position = targetPos;
         }
-
-        /*
-        if (Physics2D.OverlapBox(targetPos, size, 0f, Ground) != null || Physics2D.OverlapBox(targetPos, size, 0f) == null)
-        {
-            // no object in here
-            // then move
-            Debug.Log("Empty Space, Move WoodBoxGuide");
-
-            transform.position = targetPos;
-
-            return;
-        }
-        else
-        {
-            // object blocks WoodBoxGuide
-            // Woodbox Breaks
-            Debug.Log("Not Empty Space, Wood box Breaks");
-
-            WoodBox.GetComponent<WoodBoxController>().Break();
-
-            Destroy(gameObject);
-
-            return;
-        }
-        */
-
     }
-
-}
+ }

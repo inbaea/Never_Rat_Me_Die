@@ -88,7 +88,7 @@ public class StoneGuide : MonoBehaviour
 
             }
         }
-        catch (NullReferenceException e)
+        catch
         {
             transform.position = targetPos;
         }
