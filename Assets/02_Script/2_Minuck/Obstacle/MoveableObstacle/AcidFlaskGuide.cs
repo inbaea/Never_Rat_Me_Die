@@ -84,11 +84,11 @@ public class AcidFlaskGuide : MonoBehaviour
 
             if (objectsInTarget.Length != 0)
             {
-                Debug.Log("From Stone Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
+                Debug.Log("From Acid Flask Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
             }
             else
             {
-                Debug.Log("From Stone Guide: NULL");
+                Debug.Log("From Acid Flask Guide: NULL");
             }
 
             if (objectsInTarget.Length == 0)
@@ -115,7 +115,7 @@ public class AcidFlaskGuide : MonoBehaviour
                         break;
                     } else if (objectsInTarget[i].tag == "Wall")
                     {
-
+                        transform.position = targetPos;
                         keepGoing = false;
                         break;
                     }

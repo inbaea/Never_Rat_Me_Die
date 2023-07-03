@@ -44,9 +44,11 @@ public class AcidFlaskController : MonoBehaviour
             Destroy(other.transform.parent.gameObject.gameObject);
             Destroy(this.transform.parent.gameObject);
         }
-        else
+        else if (other.gameObject.tag == "Wall")
         {
-
+            Vector2 spawnpos = new Vector2((int)transform.position.x, (int)transform.position.y);
+            Instantiate(AcidFloor, spawnpos, transform.rotation);
+            Destroy(this.transform.parent.gameObject);
         }
     }
 
