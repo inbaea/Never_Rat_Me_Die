@@ -18,6 +18,8 @@ TagManager:
   - Goal
   - AcidFlask
   - AcidFlaskGuide
+  - MovingEnemy
+  - MovingEnemyGuide
   layers:
   - Default
   - TransparentFX
