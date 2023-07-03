@@ -71,22 +71,25 @@ public class WoodBoxGuide : MonoBehaviour
         origPos = transform.position;
         targetPos = origPos + (direction * tileSize);
 
-        Debug.Log("From Wood Box Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
-
         objectInTarget = Physics2D.OverlapBox(targetPos, size, 0f);
+
+        if (objectInTarget != null)
+        {
+            Debug.Log("From Wood Box Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
+        }
+        else
+        {
+            Debug.Log("From Wood Box Guide: NULL");
+        }
 
         try
         {
             if (objectInTarget.tag == "Ground")
             {
-                Debug.Log("Ground Space, Move MoveableObject");
-
                 transform.position = targetPos;
             }
             else
             {
-                Debug.Log("Not Empty Space, Can't Move MoveableObject");
-
                 WoodBox.GetComponent<WoodBoxController>().Break();
 
                 Destroy(gameObject);
@@ -94,8 +97,6 @@ public class WoodBoxGuide : MonoBehaviour
         }
         catch (NullReferenceException e)
         {
-            Debug.Log("Null Space, Move MoveableObject");
-
             transform.position = targetPos;
         }
 
