@@ -14,16 +14,11 @@ public class PlayerGuideCorutine : MonoBehaviour
 
     private AudioSource moveSound;
 
-    public LayerMask Wall;
-    public LayerMask Goal;
-    public LayerMask MoveableObject;
-    public LayerMask Ground;
-    public LayerMask Item;
-
     private int tileSize = 2;
     public Vector2 size = new Vector2(1,1);
 
     public int moveCount = 99;
+    public int adrenalineCount = 0;
 
     public bool isStageCleared = false;
     public bool isFailed = false;
@@ -171,15 +166,23 @@ public class PlayerGuideCorutine : MonoBehaviour
                         return;
                     }
 
-                    if (objectsInTarget[i].tag == "StoneGuide" || objectsInTarget[i].tag == "WoodBoxGuide" || objectsInTarget[i].tag == "AcidFlaskGuide")
+                    if (objectsInTarget[i].tag == "StoneGuide" || objectsInTarget[i].tag == "WoodBoxGuide")
                     {
                         // the object is MoveableObject
 
-                        GameObject tempStoneObj = objectsInTarget[i].gameObject;
+                        GameObject tempObj = objectsInTarget[i].gameObject;
 
-                        Push(direction, tempStoneObj);
+                        if (adrenalineCount > 0)
+                        {
+                            Destroy(tempObj.transform.parent);
+                            adrenalineCount--;
+                        }
+                        else
+                        {
+                            Push(direction, tempObj);
+                        }
 
-                        tempStoneObj = null;
+                        tempObj = null;
 
                         return;
                     }
@@ -208,6 +211,17 @@ public class PlayerGuideCorutine : MonoBehaviour
                         // the object is Item
 
                         transform.position = targetPos;
+
+                        return;
+                    }
+
+                    if (objectsInTarget[i].tag == "AcidFlaskGuide")
+                    {
+                        GameObject tempObj = objectsInTarget[i].gameObject;
+
+                        Push(direction, tempObj);
+
+                        tempObj = null;
 
                         return;
                     }
@@ -240,11 +254,11 @@ public class PlayerGuideCorutine : MonoBehaviour
             // the object is MoveableObject
             Debug.Log("MoveableObject");
 
-            GameObject tempStoneObj = Physics2D.OverlapBox(targetPos, size, 0f, MoveableObject).gameObject;
+            GameObject tempObj = Physics2D.OverlapBox(targetPos, size, 0f, MoveableObject).gameObject;
 
-            Push(direction, tempStoneObj);
+            Push(direction, tempObj);
 
-            tempStoneObj = null;
+            tempObj = null;
 
             return;
         }
