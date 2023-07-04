@@ -166,7 +166,7 @@ public class PlayerGuideCorutine : MonoBehaviour
                         return;
                     }
 
-                    if (objectsInTarget[i].tag == "StoneGuide" || objectsInTarget[i].tag == "WoodBoxGuide")
+                    else if (objectsInTarget[i].tag == "StoneGuide" || objectsInTarget[i].tag == "WoodBoxGuide")
                     {
                         // the object is MoveableObject
 
@@ -188,14 +188,14 @@ public class PlayerGuideCorutine : MonoBehaviour
                         return;
                     }
 
-                    if (objectsInTarget[i].tag == "Wall")
+                    else if(objectsInTarget[i].tag == "Wall")
                     {
                         // the object is Wall
 
                         return;
                     }
 
-                    if (objectsInTarget[i].tag == "Goal")
+                    else if(objectsInTarget[i].tag == "Goal")
                     {
                         // the object is Goal
                         // Stage Clear
@@ -207,7 +207,7 @@ public class PlayerGuideCorutine : MonoBehaviour
                         return;
                     }
 
-                    if (objectsInTarget[i].tag == "Item")
+                    else if(objectsInTarget[i].tag == "Item")
                     {
                         // the object is Item
 
@@ -216,13 +216,20 @@ public class PlayerGuideCorutine : MonoBehaviour
                         return;
                     }
 
-                    if (objectsInTarget[i].tag == "AcidFlaskGuide")
+                    else if(objectsInTarget[i].tag == "AcidFlaskGuide")
                     {
                         GameObject tempObj = objectsInTarget[i].gameObject;
 
                         Push(direction, tempObj);
 
                         tempObj = null;
+
+                        return;
+                    }
+
+                    else
+                    {
+                        transform.position = targetPos;
 
                         return;
                     }

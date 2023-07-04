@@ -20,6 +20,7 @@ TagManager:
   - AcidFlaskGuide
   - MovingEnemy
   - MovingEnemyGuide
+  - MouceTrap
   layers:
   - Default
   - TransparentFX
