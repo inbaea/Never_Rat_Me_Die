@@ -36,7 +36,7 @@ public class PlayerGuideCorutine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (moveCount <= 0)
+        if (moveCount < 0)
         {
             Debug.Log("Failed to Clear Stage");
         }
@@ -152,7 +152,11 @@ public class PlayerGuideCorutine : MonoBehaviour
 
         if (objectsInTarget.Length != 0)
         {
-            Debug.Log("From Player Guide: " + objectsInTarget);
+            for (int i = 0; i < objectsInTarget.Length; i++)
+            {
+                Debug.Log("From Player Guide: " + objectsInTarget[i].tag);
+            }
+                
         }
         else
         {

@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
             canvas.transform.Find("StageClear").gameObject.SetActive(true);
         }
 
-        if (playerGuide.moveCount <= 0)
+        if (playerGuide.moveCount < 0)
         {
             canvas.transform.Find("FailedToClear").gameObject.SetActive(true);
         }
