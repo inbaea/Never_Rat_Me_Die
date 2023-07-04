@@ -98,6 +98,10 @@ public class StoneGuide : MonoBehaviour
                             transform.position = targetPos;
                             break;
 
+                        case "MouceTrap":
+                            transform.position = targetPos;
+                            break;
+
                         default:
                             break;
                     }

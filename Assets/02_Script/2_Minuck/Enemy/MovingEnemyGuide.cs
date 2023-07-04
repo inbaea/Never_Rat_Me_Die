@@ -81,30 +81,34 @@ public class MovingEnemyGuide : MonoBehaviour
             {
                 for (int i = 0; i < objectsInTarget.Length; i++)
                 {
-                    if (objectsInTarget[i].tag == "Ground")
+                    switch (objectsInTarget[i].tag)
                     {
-                        // no object in here
-                        // then move
+                        case "Ground":
+                            // no object in here
+                            // then move
 
-                        transform.position = targetPos;
+                            transform.position = targetPos;
 
-                        return;
-                    }
+                            break;
 
-                    if (objectsInTarget[i].tag == "Wall")
-                    {
-                        // the object is Wall
-                        if (direction.Equals(new Vector3(-1, 0, 0)))
-                        {
-                            direction = new Vector3(1, 0, 0);
-                            transform.parent.GetChild(0).transform.rotation = transform.parent.GetChild(0).transform.rotation * new Quaternion(0, 1, 0, 0);
-                        } else if (direction.Equals(new Vector3(1, 0, 0)))
-                        {
-                            direction = new Vector3(-1, 0, 0);
-                            transform.parent.GetChild(0).transform.rotation = transform.parent.GetChild(0).transform.rotation * new Quaternion(0, 1, 0, 0);
-                        }
+                        case "Wall":
+                            // the object is Wall
+                            if (direction.Equals(new Vector3(-1, 0, 0)))
+                            {
+                                direction = new Vector3(1, 0, 0);
+                                transform.parent.GetChild(0).transform.rotation = transform.parent.GetChild(0).transform.rotation * new Quaternion(0, 1, 0, 0);
+                            }
+                            else if (direction.Equals(new Vector3(1, 0, 0)))
+                            {
+                                direction = new Vector3(-1, 0, 0);
+                                transform.parent.GetChild(0).transform.rotation = transform.parent.GetChild(0).transform.rotation * new Quaternion(0, 1, 0, 0);
+                            }
 
-                        return;
+                            break;
+
+                        default:
+                            transform.position = targetPos;
+                            break;
                     }
 
                 }

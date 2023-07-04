@@ -92,15 +92,18 @@ public class WoodBoxGuide : MonoBehaviour
             {
                 for (int i = 0; i < objectsInTarget.Length; i++)
                 {
-                    if (objectsInTarget[i].CompareTag("Ground"))
+                    switch (objectsInTarget[i].tag)
                     {
-                        transform.position = targetPos;
-                    }
-                    else
-                    {
-                        WoodBox.GetComponent<WoodBoxController>().Break();
+                        case "Ground":
+                        case "MouceTrap":
+                            transform.position = targetPos;
+                            break;
 
-                        Destroy(gameObject);
+                        default:
+                            WoodBox.GetComponent<WoodBoxController>().Break();
+
+                            Destroy(gameObject);
+                            break;
                     }
                 }
             }
