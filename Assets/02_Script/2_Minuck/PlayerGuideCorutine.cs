@@ -174,8 +174,9 @@ public class PlayerGuideCorutine : MonoBehaviour
 
                         if (adrenalineCount > 0)
                         {
-                            Destroy(tempObj.transform.parent);
+                            Destroy(tempObj.transform.parent.gameObject);
                             adrenalineCount--;
+                            transform.position = targetPos;
                         }
                         else
                         {
