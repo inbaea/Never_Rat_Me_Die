@@ -8,14 +8,14 @@ public class PlayerGuideCorutine : MonoBehaviour
 {
     public GameObject player;
 
-    private float moveCooldown = 0.35f;
+    private readonly float moveCooldown = 0.35f;
 
     private Vector3 origPos, targetPos;
 
     private AudioSource moveSound;
 
-    private int tileSize = 2;
-    public Vector2 size = new Vector2(1,1);
+    private readonly int tileSize = 2;
+    public Vector2 size = new(1,1);
 
     public int moveCount = 99;
     public int adrenalineCount = 0;
@@ -53,39 +53,57 @@ public class PlayerGuideCorutine : MonoBehaviour
 
         if (target != null)
         {
-            if (target.tag == "StoneGuide")
+            switch (target.tag)
             {
-                StoneGuide stoneGuide = target.GetComponent<StoneGuide>();
+                case "StoneGuide":
+                    {
+                        StoneGuide stoneGuide = target.GetComponent<StoneGuide>();
 
-                if (stoneGuide.isGetPushed == false)
-                {
-                    stoneGuide.Move(direction);
-                    target = null;
-                }
-            } else if (target.tag == "WoodBoxGuide")
-            {
-                WoodBoxGuide woodBoxGuide = target.GetComponent<WoodBoxGuide>();
+                        if (stoneGuide.isGetPushed == false)
+                        {
+                            stoneGuide.Move(direction);
+                        }
 
-                if (woodBoxGuide.isGetPushed == false)
-                {
-                    woodBoxGuide.Move(direction);
-                    target = null;
-                }
-            } else if (target.tag == "AcidFlaskGuide")
-            {
-                AcidFlaskGuide acidFlaskGuide = target.GetComponent<AcidFlaskGuide>();
+                        break;
+                    }
 
-                if (acidFlaskGuide.isGetPushed == false)
-                {
-                    acidFlaskGuide.Move(direction);
-                    target = null;
-                }
+                case "WoodBoxGuide":
+                    {
+                        WoodBoxGuide woodBoxGuide = target.GetComponent<WoodBoxGuide>();
+
+                        if (woodBoxGuide.isGetPushed == false)
+                        {
+                            woodBoxGuide.Move(direction);
+                        }
+
+                        break;
+                    }
+
+                case "AcidFlaskGuide":
+                    {
+                        AcidFlaskGuide acidFlaskGuide = target.GetComponent<AcidFlaskGuide>();
+
+                        if (acidFlaskGuide.isGetPushed == false)
+                        {
+                            acidFlaskGuide.Move(direction);
+                        }
+
+                        break;
+                    }
+
+                default:
+                    break;
             }
         }
         else
         {
             Debug.LogError("MoveableObject Guide Not Founded");
         }
+
+    }
+
+    public void GetPushed()
+    {
 
     }
 
@@ -154,154 +172,88 @@ public class PlayerGuideCorutine : MonoBehaviour
             {
                 for (int i = 0; i < objectsInTarget.Length; i++)
                 {
-                    if (objectsInTarget[i].tag == "Ground")
+                    switch (objectsInTarget[i].tag)
                     {
-                        // no object in here
-                        // then move
+                        case "Ground":
+                            // no object in here
+                            // then move
 
-                        transform.position = targetPos;
-
-                        moveSound.Play();
-
-                        return;
-                    }
-
-                    else if (objectsInTarget[i].tag == "StoneGuide" || objectsInTarget[i].tag == "WoodBoxGuide")
-                    {
-                        // the object is MoveableObject
-
-                        GameObject tempObj = objectsInTarget[i].gameObject;
-
-                        if (adrenalineCount > 0)
-                        {
-                            Destroy(tempObj.transform.parent.gameObject);
-                            adrenalineCount--;
                             transform.position = targetPos;
-                        }
-                        else
-                        {
-                            Push(direction, tempObj);
-                        }
 
-                        tempObj = null;
+                            moveSound.Play();
 
-                        return;
-                    }
+                            return;
 
-                    else if(objectsInTarget[i].tag == "Wall")
-                    {
-                        // the object is Wall
+                        case "StoneGuide":
+                        case "WoodBoxGuide":
+                            {
+                                // the object is MoveableObject
 
-                        return;
-                    }
+                                GameObject tempObj = objectsInTarget[i].gameObject;
 
-                    else if(objectsInTarget[i].tag == "Goal")
-                    {
-                        // the object is Goal
-                        // Stage Clear
+                                if (adrenalineCount > 0)
+                                {
+                                    Destroy(tempObj.transform.parent.gameObject);
+                                    adrenalineCount--;
+                                    transform.position = targetPos;
+                                }
+                                else
+                                {
+                                    Push(direction, tempObj);
+                                }
 
-                        transform.position = targetPos;
+                                tempObj = null;
 
-                        isStageCleared = true;
+                                return;
+                            }
 
-                        return;
-                    }
+                        case "Wall":
+                            // the object is Wall
 
-                    else if(objectsInTarget[i].tag == "Item")
-                    {
-                        // the object is Item
+                            return;
 
-                        transform.position = targetPos;
+                        case "Goal":
+                            // the object is Goal
+                            // Stage Clear
 
-                        return;
-                    }
+                            transform.position = targetPos;
 
-                    else if(objectsInTarget[i].tag == "AcidFlaskGuide")
-                    {
-                        GameObject tempObj = objectsInTarget[i].gameObject;
+                            isStageCleared = true;
 
-                        Push(direction, tempObj);
+                            return;
 
-                        tempObj = null;
+                        case "Item":
+                            // the object is Item
 
-                        return;
-                    }
+                            transform.position = targetPos;
 
-                    else
-                    {
-                        transform.position = targetPos;
+                            return;
 
-                        return;
+                        case "AcidFlaskGuide":
+                            {
+                                GameObject tempObj = objectsInTarget[i].gameObject;
+
+                                Push(direction, tempObj);
+
+                                tempObj = null;
+
+                                return;
+                            }
+
+                        default:
+
+                            transform.position = targetPos;
+
+                            return;
                     }
                 }
             }
         }
         catch
         {
-
             transform.position = targetPos;
 
             moveSound.Play();
         }
-        /*
-        if (Physics2D.OverlapBox(targetPos, size, 0f, Ground) != null || Physics2D.OverlapBox(targetPos, size, 0f) == null)
-        {
-            // no object in here
-            // then move
-            Debug.Log("Empty Space");
-
-            transform.position = targetPos;
-
-            moveSound.Play();
-
-            return;
-        }
-
-        if (Physics2D.OverlapBox(targetPos, size, 0f, MoveableObject) != null)
-        {
-            // the object is MoveableObject
-            Debug.Log("MoveableObject");
-
-            GameObject tempObj = Physics2D.OverlapBox(targetPos, size, 0f, MoveableObject).gameObject;
-
-            Push(direction, tempObj);
-
-            tempObj = null;
-
-            return;
-        }
-
-        if (Physics2D.OverlapBox(targetPos, size, 0f, Wall) != null)
-        {
-            // the object is Wall
-            Debug.Log("Wall");
-
-            return;
-        }
-
-        if (Physics2D.OverlapBox(targetPos, size, 0f, Goal) != null)
-        {
-            // the object is Goal
-            // Stage Clear
-            Debug.Log("GOAL!");
-
-            transform.position = targetPos;
-
-            isStageCleared = true;
-
-            return;
-        }
-
-        if (Physics2D.OverlapBox(targetPos, size, 0f, Item) != null)
-        {
-            // the object is Item
-            // Stage Clear
-            Debug.Log("Item Looted");
-
-            transform.position = targetPos;
-
-            return;
-        }
-        */
     }
 }

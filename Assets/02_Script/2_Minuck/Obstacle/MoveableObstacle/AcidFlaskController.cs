@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AcidFlaskController : MonoBehaviour
 {
-    private float timeToMove = 0.25f;
+    private readonly float timeToMove = 0.25f;
 
     public float xVelocity = 5.0f;
     public float yVelocity = 5.0f;
@@ -14,7 +14,7 @@ public class AcidFlaskController : MonoBehaviour
 
     public GameObject AcidFloor;
 
-    public Vector2 size = new Vector2(1, 1);
+    public Vector2 size = new(1, 1);
 
     private void Awake()
     {
@@ -39,16 +39,21 @@ public class AcidFlaskController : MonoBehaviour
     {
         destroyTarget = other.gameObject;
 
-        if (other.gameObject.tag == "Stone" ||  other.gameObject.tag == "StoneGuide")
+        switch (other.gameObject.tag)
         {
-            Destroy(other.transform.parent.gameObject.gameObject);
-            Destroy(this.transform.parent.gameObject);
-        }
-        else if (other.gameObject.tag == "Wall")
-        {
-            Vector2 spawnpos = new Vector2((int)transform.position.x, (int)transform.position.y);
-            Instantiate(AcidFloor, spawnpos, transform.rotation);
-            Destroy(this.transform.parent.gameObject);
+            case "Stone":
+            case "StoneGuide":
+                Destroy(other.transform.parent.gameObject);
+                Destroy(transform.parent.gameObject);
+                break;
+
+            case "Wall":
+                {
+                    Vector2 spawnpos = new((int)transform.position.x, (int)transform.position.y);
+                    Instantiate(AcidFloor, spawnpos, transform.rotation);
+                    Destroy(transform.parent.gameObject);
+                    break;
+                }
         }
     }
 

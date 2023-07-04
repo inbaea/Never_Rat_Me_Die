@@ -16,7 +16,7 @@ public class WoodBoxGuide : MonoBehaviour
     public LayerMask Ground;
 
     private float tileSize = 2f;
-    public Vector2 size = new Vector2(1, 1);
+    public Vector2 size = new(1, 1);
 
     public Collider2D[] objectsInTarget;
 
@@ -92,7 +92,7 @@ public class WoodBoxGuide : MonoBehaviour
             {
                 for (int i = 0; i < objectsInTarget.Length; i++)
                 {
-                    if (objectsInTarget[i].tag == "Ground")
+                    if (objectsInTarget[i].CompareTag("Ground"))
                     {
                         transform.position = targetPos;
                     }

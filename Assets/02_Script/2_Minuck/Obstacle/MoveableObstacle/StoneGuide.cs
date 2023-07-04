@@ -14,8 +14,8 @@ public class StoneGuide : MonoBehaviour
 
     public LayerMask Ground;
 
-    private float tileSize = 2f;
-    public Vector2 size = new Vector2(1,1);
+    private readonly float tileSize = 2f;
+    public Vector2 size = new(1,1);
 
     public Collider2D[] objectsInTarget;
 
@@ -88,16 +88,18 @@ public class StoneGuide : MonoBehaviour
             {
                 for (int i = 0; i < objectsInTarget.Length; i++)
                 {
-                    if (objectsInTarget[i].tag == "Ground")
+                    switch (objectsInTarget[i].tag)
                     {
-                        transform.position = targetPos;
-                    }
-                    else if (objectsInTarget[i].tag == "AcidFloor")
-                    {
-                        transform.position = targetPos;
-                    }
-                    else { 
-                    
+                        case "Ground":
+                            transform.position = targetPos;
+                            break;
+
+                        case "AcidFloor":
+                            transform.position = targetPos;
+                            break;
+
+                        default:
+                            break;
                     }
                 }
             }

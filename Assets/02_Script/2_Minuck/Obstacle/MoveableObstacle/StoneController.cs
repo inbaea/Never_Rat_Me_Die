@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class StoneController : MonoBehaviour
 {
-    private float timeToMove = 0.25f;
+    private readonly float timeToMove = 0.25f;
 
     public float xVelocity = 5.0f;
     public float yVelocity = 5.0f;
 
     public GameObject target;
 
-    public Vector2 size = new Vector2(1,1);
+    public Vector2 size = new(1,1);
 
     private void Awake()
     {

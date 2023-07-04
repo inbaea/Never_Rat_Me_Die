@@ -14,8 +14,8 @@ public class AcidFlaskGuide : MonoBehaviour
 
     public LayerMask Ground;
 
-    private float tileSize = 2f;
-    public Vector2 size = new Vector2(1, 1);
+    private readonly float tileSize = 2f;
+    public Vector2 size = new(1, 1);
 
     public Collider2D[] objectsInTarget;
 
@@ -102,18 +102,20 @@ public class AcidFlaskGuide : MonoBehaviour
             {
                 for (int i = 0; i < objectsInTarget.Length; i++)
                 {
-                    if (objectsInTarget[i].tag == "Ground")
+                    if (objectsInTarget[i].CompareTag("Ground"))
                     {
                         // ground = moveable
 
                         transform.position = targetPos;
                         targetPos = targetPos + (direction * tileSize);
-                    } else if (objectsInTarget[i].tag == "Stone" || objectsInTarget[i].tag == "StoneGuide")
+                    }
+                    else if (objectsInTarget[i].CompareTag("Stone") || objectsInTarget[i].CompareTag("StoneGuide"))
                     {
                         transform.position = targetPos;
                         keepGoing = false;
                         break;
-                    } else if (objectsInTarget[i].tag == "Wall")
+
+                    } else if (objectsInTarget[i].CompareTag("Wall"))
                     {
                         transform.position = targetPos;
                         keepGoing = false;

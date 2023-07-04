@@ -21,6 +21,7 @@ TagManager:
   - MovingEnemy
   - MovingEnemyGuide
   - MouceTrap
+  - BombWall
   layers:
   - Default
   - TransparentFX
