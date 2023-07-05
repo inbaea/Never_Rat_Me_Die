@@ -186,7 +186,7 @@ public class PlayerGuideCorutine : MonoBehaviour
 
                             moveSound.Play();
 
-                            return;
+                            break;
 
                         case "StoneGuide":
                         case "WoodBoxGuide":
@@ -208,13 +208,13 @@ public class PlayerGuideCorutine : MonoBehaviour
 
                                 tempObj = null;
 
-                                return;
+                                break;
                             }
 
                         case "Wall":
                             // the object is Wall
 
-                            return;
+                            break;
 
                         case "Goal":
                             // the object is Goal
@@ -224,14 +224,14 @@ public class PlayerGuideCorutine : MonoBehaviour
 
                             isStageCleared = true;
 
-                            return;
+                            break;
 
                         case "Item":
                             // the object is Item
 
                             transform.position = targetPos;
 
-                            return;
+                            break;
 
                         case "AcidFlaskGuide":
                             {
@@ -241,14 +241,8 @@ public class PlayerGuideCorutine : MonoBehaviour
 
                                 tempObj = null;
 
-                                return;
+                                break;
                             }
-
-                        default:
-
-                            transform.position = targetPos;
-
-                            return;
                     }
                 }
             }

@@ -5,18 +5,24 @@ using UnityEngine;
 
 public class MouceTrapController : MonoBehaviour
 {
+    public Collider2D[] objectsInTarget;
+
     void OnDrawGizmos()
     {
         Gizmos.color = UnityEngine.Color.red;
         Gizmos.DrawWireSphere(transform.position, 4f);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        if (other.CompareTag("Player"))
+        objectsInTarget = Physics2D.OverlapCircleAll(transform.position, 4f);
+
+        for (int i = 0; i < objectsInTarget.Length; i++)
         {
-            transform.GetChild(0).gameObject.SetActive(true);
-            transform.GetChild(1).gameObject.SetActive(false);
+            if (objectsInTarget[i].CompareTag("Player")){
+                transform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(1).gameObject.SetActive(false);
+            }
         }
     }
 }

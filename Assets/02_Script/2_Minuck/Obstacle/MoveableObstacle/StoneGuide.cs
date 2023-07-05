@@ -70,7 +70,10 @@ public class StoneGuide : MonoBehaviour
 
         if (objectsInTarget.Length != 0)
         {
-            Debug.Log("From Stone Guide: " + Physics2D.OverlapBox(targetPos, size, 0f));
+            for (int i = 0; i < objectsInTarget.Length; i++)
+            {
+                Debug.Log("From Player Guide: " + objectsInTarget[i].tag);
+            }
         }
         else
         {

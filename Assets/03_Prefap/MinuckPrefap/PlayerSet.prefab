@@ -218,7 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   size: {x: 1, y: 1}
-  moveCount: 18
+  moveCount: 16
   adrenalineCount: 0
   isStageCleared: 0
   isFailed: 0
