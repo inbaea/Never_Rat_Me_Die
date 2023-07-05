@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class InStageDestroy : MonoBehaviour
 {
-    private void Awake()
+    private void Update()
     {
         if (SceneManager.GetActiveScene().name == "Stage2" || SceneManager.GetActiveScene().name == "Stage3")
         {
