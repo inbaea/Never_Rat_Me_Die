@@ -25,6 +25,8 @@ public class PlayerGuideCorutine : MonoBehaviour
 
     public Collider2D[] objectsInTarget;
 
+    public Vector3 direction;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +52,6 @@ public class PlayerGuideCorutine : MonoBehaviour
 
     void Push(Vector3 direction, GameObject target)
     {
-
         if (target != null)
         {
             switch (target.tag)
@@ -102,9 +103,12 @@ public class PlayerGuideCorutine : MonoBehaviour
 
     }
 
-    public void GetPushed()
+    public void GetPushed(Vector3 direction)
     {
+        origPos = transform.position;
+        targetPos = origPos + (direction * tileSize);
 
+        transform.position = targetPos;
     }
 
     private IEnumerator Move()
@@ -143,6 +147,8 @@ public class PlayerGuideCorutine : MonoBehaviour
 
     private void CheckObject(Vector3 direction)
     {
+        this.direction = direction;
+
         moveCount--;
 
         origPos = transform.position;
@@ -243,6 +249,12 @@ public class PlayerGuideCorutine : MonoBehaviour
 
                                 break;
                             }
+
+                        case "BombWall":
+
+                            transform.position = targetPos;
+
+                            break;
                     }
                 }
             }
