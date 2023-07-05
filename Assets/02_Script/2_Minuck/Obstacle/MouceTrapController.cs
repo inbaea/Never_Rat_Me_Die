@@ -10,12 +10,12 @@ public class MouceTrapController : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = UnityEngine.Color.red;
-        Gizmos.DrawWireSphere(transform.position, 4f);
+        Gizmos.DrawWireSphere(transform.position, 2f);
     }
 
     private void Update()
     {
-        objectsInTarget = Physics2D.OverlapCircleAll(transform.position, 4f);
+        objectsInTarget = Physics2D.OverlapCircleAll(transform.position, 2f);
 
         for (int i = 0; i < objectsInTarget.Length; i++)
         {
