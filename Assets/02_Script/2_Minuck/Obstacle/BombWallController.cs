@@ -8,6 +8,13 @@ public class BombWallController : MonoBehaviour
 
     public Vector3 direction;
 
+    AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = transform.parent.GetChild(1).GetComponent<AudioSource>();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -33,6 +40,8 @@ public class BombWallController : MonoBehaviour
             {
                 direction = new Vector3(0, 1, 0);
             }
+
+            audioSource.Play();
 
             other.transform.parent.GetChild(1).GetComponent<PlayerGuideCorutine>().GetPushed(direction);
 
