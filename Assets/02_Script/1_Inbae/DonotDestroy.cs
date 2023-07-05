@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class DonotDestroy : MonoBehaviour
 {
-    public int LeftMoveCount;
-
     private void Awake()
     {
-        var obj = FindObjectsOfType<GameManager>();
+        var obj = FindObjectsOfType<DonotDestroy>();
 
-        if (obj.Length == 1) {
+        if (obj.Length == 1)
+        {
             DontDestroyOnLoad(gameObject);
-        } else {
+        }
+        else
+        {
             Destroy(gameObject);
         }
   }
