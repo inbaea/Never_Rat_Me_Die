@@ -41,6 +41,7 @@ public class PlayerGuideCorutine : MonoBehaviour
         if (moveCount < 0)
         {
             Debug.Log("Failed to Clear Stage");
+            isFailed = true;
         }
     }
 
@@ -114,7 +115,7 @@ public class PlayerGuideCorutine : MonoBehaviour
     private IEnumerator Move()
     {
 
-        while (true)
+        while (isFailed == false)
         {
             if (Input.GetKeyDown(KeyCode.A))
             {

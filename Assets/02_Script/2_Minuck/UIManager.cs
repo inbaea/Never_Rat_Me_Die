@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
         if (playerGuide.moveCount < 0)
         {
             canvas.transform.Find("FailedToClear").gameObject.SetActive(true);
+            MoveCount.text = "Fail";
         }
     }
 }
