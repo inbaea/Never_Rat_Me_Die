@@ -20,6 +20,8 @@ public class WoodBoxGuide : MonoBehaviour
 
     public Collider2D[] objectsInTarget;
 
+    public AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class WoodBoxGuide : MonoBehaviour
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         WoodBox = transform.parent.transform.GetChild(0).gameObject;
         transform.position = WoodBox.transform.position;
 
@@ -90,6 +93,7 @@ public class WoodBoxGuide : MonoBehaviour
             if (objectsInTarget.Length == 0)
             {   // null space
                 transform.position = targetPos;
+                audioSource.Play();
             }
             else
             {
@@ -98,8 +102,10 @@ public class WoodBoxGuide : MonoBehaviour
                     switch (objectsInTarget[i].tag)
                     {
                         case "Ground":
-                        case "MouceTrap":
                             transform.position = targetPos;
+
+                            audioSource.Play();
+
                             break;
 
                         default:
