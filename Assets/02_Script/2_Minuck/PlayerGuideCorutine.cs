@@ -14,6 +14,7 @@ public class PlayerGuideCorutine : MonoBehaviour
 
     private AudioSource moveSound;
     public AudioSource stoneBreak;
+    public AudioSource throwFlask;
 
     private readonly int tileSize = 2;
     public Vector2 size = new(1,1);
@@ -89,6 +90,8 @@ public class PlayerGuideCorutine : MonoBehaviour
                         if (acidFlaskGuide.isGetPushed == false)
                         {
                             acidFlaskGuide.Move(direction);
+
+                            throwFlask.Play();
                         }
 
                         break;

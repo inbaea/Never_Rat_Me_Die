@@ -14,6 +14,8 @@ public class AcidFlaskController : MonoBehaviour
 
     public GameObject AcidFloor;
 
+    public AudioSource crash;
+
     public Vector2 size = new(1, 1);
 
     private void Awake()
@@ -43,15 +45,28 @@ public class AcidFlaskController : MonoBehaviour
         {
             case "Stone":
             case "StoneGuide":
+
+                crash.Play();
+
                 Destroy(other.transform.parent.gameObject);
-                Destroy(transform.parent.gameObject);
+
+                gameObject.SetActive(false);
+                transform.parent.GetChild(1).gameObject.SetActive(false);
+
+                Destroy(transform.parent.gameObject, 1.0f);
                 break;
 
             case "Wall":
                 {
                     Vector2 spawnpos = new((int)transform.position.x, (int)transform.position.y);
                     Instantiate(AcidFloor, spawnpos, transform.rotation);
-                    Destroy(transform.parent.gameObject);
+
+                    crash.Play();
+
+                    gameObject.SetActive(false);
+                    transform.parent.GetChild(1).gameObject.SetActive(false);
+
+                    Destroy(transform.parent.gameObject, 1.0f);
                     break;
                 }
         }
