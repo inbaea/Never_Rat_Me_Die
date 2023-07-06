@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class StoneController : MonoBehaviour
 {
-    private readonly float timeToMove = 0.25f;
+    private readonly float timeToMove = 0.15f;
 
-    public float xVelocity = 5.0f;
-    public float yVelocity = 5.0f;
+    public float xVelocity = 8.0f;
+    public float yVelocity = 8.0f;
 
     public GameObject target;
 

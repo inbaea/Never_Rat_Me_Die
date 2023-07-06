@@ -8,7 +8,7 @@ public class PlayerGuideCorutine : MonoBehaviour
 {
     public GameObject player;
 
-    private readonly float moveCooldown = 0.35f;
+    private readonly float moveCooldown = 0.20f;
 
     private Vector3 origPos, targetPos;
 
