@@ -38,7 +38,7 @@ public class PlayerGuideCorutine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (moveCount < 0)
+        if (moveCount <= 0)
         {
             Debug.Log("Failed to Clear Stage");
             isFailed = true;

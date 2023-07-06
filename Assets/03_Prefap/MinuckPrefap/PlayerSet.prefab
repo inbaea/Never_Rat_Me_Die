@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: MoveableObject.m_Bits
       value: 6144
       objectReference: {fileID: 0}
+    - target: {fileID: 1868764795905243634, guid: 09f73d42d1d48254dbb6cb18d93f2e92, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f1ecb2cffa82afa4182950ddceaa99d6, type: 3}
     - target: {fileID: 1868764795905243646, guid: 09f73d42d1d48254dbb6cb18d93f2e92, type: 3}
       propertyPath: m_Name
       value: PlayerGuide
@@ -223,3 +227,4 @@ MonoBehaviour:
   isStageCleared: 0
   isFailed: 0
   objectsInTarget: []
+  direction: {x: 0, y: 0, z: 0}

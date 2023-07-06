@@ -262,8 +262,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -520264651
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4d3b6b40cc0e739438eade6d11ceb04e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -777,6 +777,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1065938783}
     m_Modifications:
+    - target: {fileID: 190933208917864010, guid: 312754c6caed1694ab08e7268337a5a0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 190933208917864010, guid: 312754c6caed1694ab08e7268337a5a0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 190933208917864010, guid: 312754c6caed1694ab08e7268337a5a0, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -520264651
+      objectReference: {fileID: 0}
     - target: {fileID: 190933209222403840, guid: 312754c6caed1694ab08e7268337a5a0, type: 3}
       propertyPath: m_Name
       value: AcidFlaskSet
@@ -1138,6 +1150,10 @@ PrefabInstance:
     - target: {fileID: 2048255537977582193, guid: be99f7423e6e3f343bced3e095290fc3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048255537977582195, guid: be99f7423e6e3f343bced3e095290fc3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be99f7423e6e3f343bced3e095290fc3, type: 3}
