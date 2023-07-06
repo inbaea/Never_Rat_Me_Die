@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     {
         MoveCount.text = playerGuide.moveCount.ToString();
 
-        if (playerGuide.isStageCleared)
+        if (playerGuide.isStageCleared && playerGuide.moveCount >= 0)
         {
             canvas.transform.Find("StageClear").gameObject.SetActive(true);
         }
