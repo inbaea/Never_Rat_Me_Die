@@ -154,6 +154,15 @@ public class PlayerGuideCorutine : MonoBehaviour
     {
         this.direction = direction;
 
+        if (direction.Equals(new Vector3(-1, 0, 0)))
+        {
+            transform.parent.GetChild(0).transform.rotation = new Quaternion(0, 1, 0, 0);
+        }
+        else if (direction.Equals(new Vector3(1, 0, 0)))
+        {
+            transform.parent.GetChild(0).transform.rotation = new Quaternion(0, 0, 0, 1);
+        }
+
         moveCount--;
 
         origPos = transform.position;
