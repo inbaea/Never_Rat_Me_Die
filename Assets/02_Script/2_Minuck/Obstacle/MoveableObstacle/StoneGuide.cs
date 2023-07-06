@@ -19,10 +19,14 @@ public class StoneGuide : MonoBehaviour
 
     public Collider2D[] objectsInTarget;
 
+    public AudioSource audioSource;
+
     private void Awake()
     {
         stone = transform.parent.transform.GetChild(0).gameObject;
         transform.position = stone.transform.position;
+
+        audioSource = GetComponent<AudioSource>();
 
         isMoving = false;
         isGetPushed = false;
@@ -86,6 +90,7 @@ public class StoneGuide : MonoBehaviour
             {
                 //null space
                 transform.position = targetPos;
+                audioSource.Play();
             }
             else
             {
@@ -95,14 +100,12 @@ public class StoneGuide : MonoBehaviour
                     {
                         case "Ground":
                             transform.position = targetPos;
+                            audioSource.Play();
                             break;
 
                         case "AcidFloor":
                             transform.position = targetPos;
-                            break;
-
-                        case "MouceTrap":
-                            transform.position = targetPos;
+                            audioSource.Play();
                             break;
 
                         default:

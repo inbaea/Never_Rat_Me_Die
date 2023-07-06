@@ -13,6 +13,7 @@ public class PlayerGuideCorutine : MonoBehaviour
     private Vector3 origPos, targetPos;
 
     private AudioSource moveSound;
+    public AudioSource stoneBreak;
 
     private readonly int tileSize = 2;
     public Vector2 size = new(1,1);
@@ -204,6 +205,7 @@ public class PlayerGuideCorutine : MonoBehaviour
 
                                 if (adrenalineCount > 0)
                                 {
+                                    stoneBreak.Play();
                                     Destroy(tempObj.transform.parent.gameObject);
                                     adrenalineCount--;
                                     transform.position = targetPos;
