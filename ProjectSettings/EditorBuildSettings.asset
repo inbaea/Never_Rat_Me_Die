@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/00_Scenes/01_StageSelect.unity
     guid: ec2f69e406a30f44f8c01dc05aa88e61
   - enabled: 1
-    path: Assets/00_Scenes/minuck/HelltakerStage1.unity
+    path: Assets/00_Scenes/minuck/Stage1.unity
     guid: 6bf31941cc826474a97e213f38d39c5f
   - enabled: 1
     path: Assets/00_Scenes/minuck/Stage2.unity
@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_Scenes/minuck/Stage3.unity
     guid: 50d9f7b6695c48a49a8f8b8d85be6c8f
+  - enabled: 1
+    path: Assets/00_Scenes/minuck/Stage4.unity
+    guid: 935fd70196a3c464cbfcbf87beab1405
+  - enabled: 1
+    path: Assets/00_Scenes/minuck/Stage5.unity
+    guid: f66435014c1497940a3f3558c09e7b94
   m_configObjects: {}

@@ -12,7 +12,7 @@ public class Go2Stage : MonoBehaviour
 
     public void GoStage1()
     {
-        SceneManager.LoadScene("HelltakerStage1");
+        SceneManager.LoadScene("Stage1");
     }
 
     public void GoStage2()
@@ -27,6 +27,11 @@ public class Go2Stage : MonoBehaviour
 
     public void GoStage4()
     {
-        SceneManager.LoadScene("HelltakerStage1");
+        SceneManager.LoadScene("Stage4");
+    }
+
+    public void GoStage5()
+    {
+        SceneManager.LoadScene("Stage5");
     }
 }
