@@ -42,8 +42,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: beffe7c05272c524e8b4152f830fb94c, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   stoneBreak: {fileID: 4188636385472421266}
-  throwFlask: {fileID: 0}
+  throwFlask: {fileID: 5068635725577254214}
   size: {x: 1, y: 1}
   moveCount: 16
   adrenalineCount: 0

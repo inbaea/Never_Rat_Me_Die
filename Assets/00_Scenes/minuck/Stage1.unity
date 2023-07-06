@@ -267,6 +267,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3962350615497413933, guid: 82424f462ad8b154ea10fb73e248d42a, type: 3}
+      propertyPath: eatCheese
+      value: 
+      objectReference: {fileID: 329762317731751512, guid: 0b1f7969c4ff40246ac1205ad459cdf5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82424f462ad8b154ea10fb73e248d42a, type: 3}
 --- !u!1 &186366550
