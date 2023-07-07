@@ -27,15 +27,17 @@ public class PlayerController: MonoBehaviour
     {
         target = transform.parent.gameObject;
         target = target.transform.GetChild(1).gameObject;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        float targetPosX = Mathf.SmoothStep(transform.position.x, target.transform.position.x, timeToMove);
-        float targetPosY = Mathf.SmoothStep(transform.position.y, target.transform.position.y, timeToMove);
-        //float targetPosX = Mathf.SmoothDamp(transform.position.x, target.transform.position.x, ref xVelocity, timeToMove);
-        //float targetPosY = Mathf.SmoothDamp(transform.position.y, target.transform.position.y, ref yVelocity, timeToMove);
+
+        //float targetPosX = Mathf.SmoothStep(transform.position.x, target.transform.position.x, timeToMove);
+        //float targetPosY = Mathf.SmoothStep(transform.position.y, target.transform.position.y, timeToMove);
+        float targetPosX = Mathf.SmoothDamp(transform.position.x, target.transform.position.x, ref xVelocity, timeToMove);
+        float targetPosY = Mathf.SmoothDamp(transform.position.y, target.transform.position.y, ref yVelocity, timeToMove);
 
         transform.position = new Vector3(targetPosX, targetPosY, transform.position.z);
     }
