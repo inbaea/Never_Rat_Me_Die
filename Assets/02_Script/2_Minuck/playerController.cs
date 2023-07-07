@@ -11,8 +11,8 @@ public class PlayerController: MonoBehaviour
 
     public Vector2 size;
 
-    public float xVelocity = 10.0f;
-    public float yVelocity = 10.0f;
+    private float xVelocity = 10.0f;
+    private float yVelocity = 10.0f;
 
     public GameObject target;
 
