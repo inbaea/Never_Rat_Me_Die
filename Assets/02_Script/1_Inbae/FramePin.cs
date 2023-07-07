@@ -6,6 +6,6 @@ public class FramePin : MonoBehaviour
 {
     public void Awake()
     {
-        Application.targetFrameRate = 40;
+        Application.targetFrameRate = 60;
     }
 }
